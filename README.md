@@ -47,18 +47,18 @@ Contributions aren't expected but would always be welcome.
 
 #### <b>Screenshots</b>
 
-![window](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/window.png)
+![window](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/window.png)
 
-![1](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/1.bmp)
-![2](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/2.bmp)
-![3](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/3.bmp)
-![4](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/4.bmp)
-![5](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/5.bmp)
-![6](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/6.bmp)
-![7](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/7.bmp)
-![8](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/8.bmp)
-![9](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/9.bmp)
-![10](https://raw.githubusercontent.com/xCrystal/TCGRandomizer/master/screenshots/10.bmp)
+![1](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/1.bmp)
+![2](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/2.bmp)
+![3](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/3.bmp)
+![4](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/4.bmp)
+![5](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/5.bmp)
+![6](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/6.bmp)
+![7](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/7.bmp)
+![8](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/8.bmp)
+![9](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/9.bmp)
+![10](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/10.bmp)
 
 #### <b>Download</b>
 
