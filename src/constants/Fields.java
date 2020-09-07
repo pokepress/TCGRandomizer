@@ -2,6 +2,8 @@ package constants;
 
 public class Fields {
 
+        /** Each card has a certain number of one-byte fields that represent 
+          various attributes and behaviors.*/
 	public enum CardFields {
 	
 		START         (0),
@@ -9,8 +11,15 @@ public class Fields {
 		GFX           (1),
 		NAME          (3),
 		RARITY        (5),
-		SET           (6),
+                /** Set uses the upper 4 bits to represent the in-game set and 
+                   the lower four bits to represent the real-world set:
+                    Low Bits: 0-Base 1-Jungle 2-Fossil 7-GB
+                    High Bits: 0-Colosseum 1-Evolution 2-Mystery 3-Laboratory
+                    Grand Master Birds/Illusion Cards: 0x47
+                    Promos: 0x48 (Rarity 0xff) */
+		SET           (6), 
 		ID            (7),
+                //Multiple of 10 between 10 and 120
 		HP            (8),
 		STAGE         (9),
 		PRE_EVO_NAME (10),
@@ -34,13 +43,16 @@ public class Fields {
 		CardFields (int offset) {
 			this.offset = offset;
 		}
-
+                
+                /**Returns the byte offset for a particular card field.*/
 		public int getOffset() {
 			return offset;
 		}
 
 	}
 	
+        /** Each move has a certain number of one-byte fields that represent 
+          various attributes and behaviors.*/
 	public enum MoveFields {
 		
 		START         (0),
@@ -63,6 +75,7 @@ public class Fields {
 			this.offset = offset;
 		}
 
+                /**Returns the byte offset for a particular move field.*/
 		public int getOffset() {
 			return offset;
 		}
