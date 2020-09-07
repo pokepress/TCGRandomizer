@@ -5,12 +5,13 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="521.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GUIController">
+<AnchorPane prefHeight="679.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GUIController">
    <children>
-      <ButtonBar buttonMinWidth="75.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="445.0">
+      <ButtonBar buttonMinWidth="75.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="621.0">
         <buttons>
           <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#beginProgram" text="Randomize!" textAlignment="CENTER">
                <font>
@@ -18,53 +19,73 @@
                </font></Button>
         </buttons>
       </ButtonBar>
-      <CheckBox fx:id="optionHP" layoutX="25.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#handleHPOptionClick" selected="true" text="Randomize HP" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="21.0" />
-      <CheckBox fx:id="optionWR" layoutX="25.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#handleWROptionClick" selected="true" text="Randomize weakness &amp; resistance" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="46.0" />
-      <CheckBox fx:id="optionRC" layoutX="25.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#handleRCOptionClick" selected="true" text="Randomize retreat cost" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="71.0" />
-      <CheckBox fx:id="optionMoves" layoutX="25.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#handleMovesOptionClick" selected="true" text="Shuffle moves" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="96.0" />
-      <CheckBox fx:id="optionFillEmpty" layoutX="145.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#handleFillEmptyOptionClick" selected="false" text="Fill empty moveslots" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="96.0" />
-      <CheckBox fx:id="optionMatchEnergies" layoutX="295.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#handleMatchEnergiesOptionClick" selected="false" text="Match energies to type" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="96.0" />
-      <ChoiceBox fx:id="minHP1" layoutX="108.0" layoutY="154.0" prefWidth="75.0" AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="154.0" />
-      <ChoiceBox fx:id="minHP2" layoutX="108.0" layoutY="186.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxHP1" layoutX="193.0" layoutY="154.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxHP2" layoutX="193.0" layoutY="186.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minRC1" layoutX="277.0" layoutY="154.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minRC2" layoutX="277.0" layoutY="186.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxRC1" layoutX="362.0" layoutY="154.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxRC2" layoutX="362.0" layoutY="186.0" prefWidth="75.0" />
-      <Label layoutX="26.0" layoutY="155.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 1/1" />
-      <Label layoutX="26.0" layoutY="187.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 1/2" />
-      <Label alignment="CENTER" layoutX="108.0" layoutY="127.0" prefHeight="25.0" prefWidth="75.0" text="Min. HP" />
-      <Label alignment="CENTER" layoutX="193.0" layoutY="127.0" prefHeight="25.0" prefWidth="75.0" text="Max. HP" />
-      <Label alignment="CENTER" layoutX="277.0" layoutY="127.0" prefHeight="25.0" prefWidth="75.0" text="Min. ret. cost" />
-      <Label alignment="CENTER" layoutX="362.0" layoutY="127.0" prefHeight="25.0" prefWidth="75.0" text="Max. ret. cost" />
-      <ChoiceBox fx:id="minHP3" layoutX="108.0" layoutY="218.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minHP4" layoutX="108.0" layoutY="251.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxHP3" layoutX="193.0" layoutY="218.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxHP4" layoutX="193.0" layoutY="251.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minRC3" layoutX="277.0" layoutY="218.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minRC4" layoutX="277.0" layoutY="251.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxRC3" layoutX="362.0" layoutY="218.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxRC4" layoutX="362.0" layoutY="251.0" prefWidth="75.0" />
-      <Label layoutX="26.0" layoutY="219.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 2/2" />
-      <Label layoutX="26.0" layoutY="251.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 1/3" />
-      <ChoiceBox fx:id="minHP5" layoutX="108.0" layoutY="283.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minHP6" layoutX="108.0" layoutY="315.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxHP5" layoutX="193.0" layoutY="283.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxHP6" layoutX="193.0" layoutY="315.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minRC5" layoutX="277.0" layoutY="283.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minRC6" layoutX="277.0" layoutY="315.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxRC5" layoutX="362.0" layoutY="283.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxRC6" layoutX="362.0" layoutY="315.0" prefWidth="75.0" />
-      <Label layoutX="26.0" layoutY="283.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 2/3" />
-      <Label layoutX="26.0" layoutY="315.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 3/3" />
-      <ChoiceBox fx:id="minW" layoutX="122.0" layoutY="389.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxW" layoutX="207.0" layoutY="389.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="minR" layoutX="122.0" layoutY="421.0" prefWidth="75.0" />
-      <ChoiceBox fx:id="maxR" layoutX="207.0" layoutY="421.0" prefWidth="75.0" />
-      <Label layoutX="25.0" layoutY="390.0" prefHeight="25.0" prefWidth="96.0" text="# of weaknesses" />
-      <Label layoutX="29.0" layoutY="422.0" prefHeight="25.0" prefWidth="96.0" text="# of resistances" />
-      <Label alignment="CENTER" layoutX="122.0" layoutY="362.0" prefHeight="25.0" prefWidth="75.0" text="Minimum" />
-      <Label alignment="CENTER" layoutX="207.0" layoutY="362.0" prefHeight="25.0" prefWidth="75.0" text="Maximum" />
+      
+      <!-- General Toggle Options-->
+      <CheckBox fx:id="optionHP" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleHPOptionClick" selected="true" text="Randomize HP"/>
+      <CheckBox fx:id="optionWR" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleWROptionClick" selected="true" text="Randomize weakness &amp; resistance" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionRC" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleRCOptionClick" selected="true" text="Randomize retreat cost" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionMoves" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleMovesOptionClick" selected="true" text="Shuffle moves" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionFillEmpty" layoutX="145.0" mnemonicParsing="false" onMouseClicked="#handleFillEmptyOptionClick" selected="false" text="Fill empty moveslots" AnchorPane.leftAnchor="145.0"/>
+      <CheckBox fx:id="optionMatchEnergies" layoutX="295.0" mnemonicParsing="false" onMouseClicked="#handleMatchEnergiesOptionClick" selected="false" text="Match energies to type" AnchorPane.leftAnchor="295.0"/>
+      <CheckBox fx:id="optionSpeed" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleSpeedOptionClick" selected="true" text="Maximize text speed and disable attack animations" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionTutorial" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleTutorialOptionClick" selected="true" text="Remove tutorial" AnchorPane.leftAnchor="25.0"/>
+      
+      <!-- HP & Retreat Cost Range Controls -->
+      <ChoiceBox fx:id="minHP1" layoutX="108.0" prefWidth="75.0" AnchorPane.leftAnchor="108.0"/>
+      <ChoiceBox fx:id="minHP2" layoutX="108.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxHP1" layoutX="193.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxHP2" layoutX="193.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minRC1" layoutX="277.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minRC2" layoutX="277.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxRC1" layoutX="362.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxRC2" layoutX="362.0" prefWidth="75.0" />
+      <Label fx:id="lbl11" layoutX="26.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 1/1" />
+      <Label fx:id="lbl12" layoutX="26.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 1/2" />
+      <Label fx:id="minHPLbl" alignment="CENTER" layoutX="108.0" prefHeight="25.0" prefWidth="75.0" text="Min. HP" />
+      <Label fx:id="maxHPLbl" alignment="CENTER" layoutX="193.0" prefHeight="25.0" prefWidth="75.0" text="Max. HP" />
+      <Label fx:id="minRCLbl" alignment="CENTER" layoutX="277.0" prefHeight="25.0" prefWidth="75.0" text="Min. ret. cost" />
+      <Label fx:id="maxRCLbl" alignment="CENTER" layoutX="362.0" prefHeight="25.0" prefWidth="75.0" text="Max. ret. cost" />
+      <ChoiceBox fx:id="minHP3" layoutX="108.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minHP4" layoutX="108.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxHP3" layoutX="193.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxHP4" layoutX="193.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minRC3" layoutX="277.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minRC4" layoutX="277.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxRC3" layoutX="362.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxRC4" layoutX="362.0" prefWidth="75.0" />
+      <Label fx:id="lbl22" layoutX="26.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 2/2" />
+      <Label fx:id="lbl13" layoutX="26.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 1/3" />
+      <ChoiceBox fx:id="minHP5" layoutX="108.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minHP6" layoutX="108.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxHP5" layoutX="193.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxHP6" layoutX="193.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minRC5" layoutX="277.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minRC6" layoutX="277.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxRC5" layoutX="362.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxRC6" layoutX="362.0" prefWidth="75.0" />
+      <Label fx:id="lbl23" layoutX="26.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 2/3" />
+      <Label fx:id="lbl33" layoutX="26.0" prefHeight="25.0" prefWidth="80.0" text="Evolution 3/3" />
+      
+      <!-- Weakness/Resistance Controls -->
+      <Label fx:id="wrTypeLbl" layoutX="10.0" prefHeight="25.0" prefWidth="105.0" text="WR Randomization" />
+      <ChoiceBox fx:id="wrRndType" layoutX="122.0" prefWidth="300.0" />
+      <Label fx:id="wrNumWeakLbl" layoutX="25.0" prefHeight="25.0" prefWidth="96.0" text="# of weaknesses" />
+      <Label fx:id="wrNumResLbl" layoutX="29.0" prefHeight="25.0" prefWidth="96.0" text="# of resistances" />
+      <Label fx:id="wrMinLbl" alignment="CENTER" layoutX="122.0" prefHeight="25.0" prefWidth="75.0" text="Minimum" />
+      <Label fx:id="wrMaxLbl" alignment="CENTER" layoutX="207.0" prefHeight="25.0" prefWidth="75.0" text="Maximum" />
+      <ChoiceBox fx:id="minW" layoutX="122.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxW" layoutX="207.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="minR" layoutX="122.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="maxR" layoutX="207.0" prefWidth="75.0" />
+      
+      <!-- Other Multiselect Options -->
+      <Label fx:id="playerCharLbl" layoutX="25.0" prefHeight="25.0" prefWidth="105.0" text="Player Character" />
+      <ChoiceBox fx:id="playerChar" layoutX="122.0" prefWidth="300.0" />
+      <Label fx:id="illusLbl" layoutX="31.0" prefHeight="25.0" prefWidth="105.0" text="Mew/Venusaur" />
+      <ChoiceBox fx:id="illusAvail" layoutX="122.0" prefWidth="300.0" />
+      
+      <!-- Seed Entry Field -->
+      <Label fx:id="seedLbl" layoutX="86.0" prefHeight="25.0" prefWidth="105.0" text="Seed" />
+      <TextField fx:id="seedVal" layoutX="122.0" prefWidth="160.0" text=""/>
    </children>
 </AnchorPane>

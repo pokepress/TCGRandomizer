@@ -3,38 +3,72 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import java.util.Set;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import logic.MainLogic;
 import settings.EvoTypes;
 import settings.Settings;
+import utils.RNG;
 
+//Actual UI logic
 public class GUIController implements Initializable {
 	
 	private static final GUIController guiController = new GUIController();
-	private boolean[] options = new boolean[Settings.NUM_OPTIONS];
+	private final boolean[] options = new boolean[Settings.NUM_OPTIONS];
 	private List<Integer> HPList = new ArrayList<Integer>();
 	private List<Integer> RCList = new ArrayList<Integer>();
+        private List<String> WRRndTypeList = new ArrayList<String>();
+        private List<String> PlayerCharList = new ArrayList<String>();
+        private List<String> IllusAvailList = new ArrayList<String>();
+        
+        private static final String WRRandomFull = "Full-Randomize each card individually";
+        private static final String WRRandomCombo = "Identically randomize within each original weakness/resistance combination";
+        private static final String WRRandomLine = "Identically randomize within each gen 1 main game evolution line";
 	
-	/* Options to randomize HP, weaknesses/resistances, retreat cost, and shuffle moves */
+        private static final String PlayerDefaultMark = "Default (Mark)";
+        private static final String PlayerMint = "Mint (Card GB 2)";
+        
+        private static final String CardPopOnly = "Default (Card Pop! Only)";
+        private static final String AddToSets = "Add randomly to in-game sets";
+        private static final String TreatAsPromo = "Treat as promo cards";
+        
+	/* Options to randomize HP, weaknesses/resistances, retreat cost, 
+           shuffle moves, default gsme speed, and skip tutorial */
 	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves;
-	@FXML private CheckBox optionFillEmpty, optionMatchEnergies;
+	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
+        @FXML private CheckBox optionTutorial;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
-	@FXML private ChoiceBox<Integer> minHP1, minHP2, minHP3, minHP4, minHP5, minHP6;
+	@FXML private Label minHPLbl, maxHPLbl, minRCLbl, maxRCLbl;
+        @FXML private Label lbl11, lbl12, lbl22, lbl13, lbl23, lbl33;
+        @FXML private ChoiceBox<Integer> minHP1, minHP2, minHP3, minHP4, minHP5, minHP6;
 	@FXML private ChoiceBox<Integer> maxHP1, maxHP2, maxHP3, maxHP4, maxHP5, maxHP6;
 	@FXML private ChoiceBox<Integer> minRC1, minRC2, minRC3, minRC4, minRC5, minRC6;
 	@FXML private ChoiceBox<Integer> maxRC1, maxRC2, maxRC3, maxRC4, maxRC5, maxRC6;
 	
-	/* Minimum and maximum number of weaknesses and resistances */
-	@FXML private ChoiceBox<Integer> minW, maxW, minR, maxR;
+	/* Minimum and maximum number of weaknesses and resistances, randomization type */
+	@FXML private Label wrTypeLbl, wrNumWeakLbl, wrNumResLbl, wrMinLbl, wrMaxLbl;
+        @FXML private ChoiceBox<Integer> minW, maxW, minR, maxR;
+        @FXML private ChoiceBox<String> wrRndType;
+        
+        /* Miscellaneous options*/
+        @FXML private Label playerCharLbl, illusLbl;
+        @FXML private ChoiceBox<String> playerChar;
+        @FXML private ChoiceBox<String> illusAvail;
+        
+        /* Randomizer seed*/
+        @FXML private Label seedLbl;
+        @FXML private TextField seedVal;
 
 	public static GUIController getGuiController() {
 		return guiController;
@@ -45,13 +79,17 @@ public class GUIController implements Initializable {
 		
 		setAllMainOptions();
 		initChoiceBoxes();
-		choiceBoxesListener();
+		addListeners();
+                populateSeedField();
+                doLayout();
 	}
 	
+        /** Returns the current status of the specified option.*/
 	public boolean getOption (int which) {
 		return options[which];
 	}
 
+        /** Toggles the status of the specified option.*/
 	private void setOption (int which) {
 		getGuiController().options[which] ^= true;
 	}
@@ -62,26 +100,83 @@ public class GUIController implements Initializable {
 		handleWROption();
 		handleRCOption();
 		handleMovesOption();
+                handleSpeedOption();
+                handleTutorialOption();
 	}
 
+        /** Updates whether HP is randomized. */
 	private void handleHPOption() {
 		setOption (Settings.Options.HP.ordinal());
 	}
 
+        /** Updates whether weakness and resistance are randomized. */
 	private void handleWROption() {
 		setOption (Settings.Options.WR.ordinal());
 	}
 
+        /** Updates whether retreat cost is randomized. */
 	private void handleRCOption() {
 		setOption (Settings.Options.RC.ordinal());
 	}
 
+        /** Updates whether moves are randomized. */
 	private void handleMovesOption() {
 		setOption (Settings.Options.MOVES.ordinal());
+	}
+
+        /** Updates whether text speed is maximized and animation are disabled.*/
+        private void handleSpeedOption() {
+                setOption (Settings.Options.SPEED.ordinal());
+        }
+        
+        /** Updates whether the tutorial game is skipped instead of just
+         * becoming a normal duel. */
+        private void handleTutorialOption() {
+                setOption (Settings.Options.REMOVETUTORIAL.ordinal());
+        }
+        
+        /** Returns the selected weakness/resistance randomization setting.*/
+        public Settings.wrRandomType getWRRandomType () {
+		return Settings.settings.getWRRandomizationType();
+	}
+        
+        /** Returns the selected player character setting.*/
+        public Settings.playerCharacter getPlayerCharacter () {
+		return Settings.settings.getPlayerChar();
+	}
+        
+        /** Returns the selected illusion card setting.*/
+        public Settings.illusionCardAvailability getIllusionCardAvailability () {
+		return Settings.settings.getIllusionCardAvailability();
+	}
+        
+        /** Returns the selected randomization seed.*/
+        public long getSeed () {
+            String seed = Settings.settings.getCustomSeed();
+            if (seed.length() == 0)
+            {
+                return 0;
+            }
+            
+            try
+            {
+                return Long.parseLong(seed);
+            }
+            catch (NumberFormatException e)
+            {
+                
+            }
+            
+            return 0;
 	}
 	
 	@FXML
 	private void beginProgram() {
+                if(this.getSeed() == 0)
+                {
+                    utils.Utils.print("A nonzero numeric seed must be supplied.");
+                    return;
+                }
 		MainLogic.main();
 	}
 	
@@ -109,6 +204,7 @@ public class GUIController implements Initializable {
 		maxW.setDisable(maxW.isDisable()^true);
 		minR.setDisable(minR.isDisable()^true);
 		maxR.setDisable(maxR.isDisable()^true);
+                wrRndType.setDisable(wrRndType.isDisable()^true);
 	}
 	
 	@FXML
@@ -144,13 +240,34 @@ public class GUIController implements Initializable {
 	private void handleMatchEnergiesOptionClick() {	
 		setOption (Settings.Options.MATCH.ordinal());
 	}	
+        
+        @FXML
+	private void handleSpeedOptionClick() {	
+		setOption (Settings.Options.SPEED.ordinal());
+	}
+        
+        @FXML
+	private void handleTutorialOptionClick() {	
+		setOption (Settings.Options.REMOVETUTORIAL.ordinal());
+	}
 	
 	/** Initializes all choice boxes to their default values */
 	private void initChoiceBoxes() {
 		
 		HPList.addAll(Arrays.asList(30, 40, 50, 60, 70, 80, 90, 100, 110, 120));
 		RCList.addAll(Arrays.asList(0, 1, 2, 3));
-		
+                
+                WRRndTypeList.add(WRRandomFull);
+                WRRndTypeList.add(WRRandomCombo);
+                WRRndTypeList.add(WRRandomLine);
+                
+                PlayerCharList.add(PlayerDefaultMark);
+                PlayerCharList.add(PlayerMint);
+                
+                IllusAvailList.add(CardPopOnly);
+                IllusAvailList.add(AddToSets);
+                IllusAvailList.add(TreatAsPromo);
+
 		minHP1.setValue(EvoTypes.EVO1OF1.getMinHP());
 		maxHP1.setValue(EvoTypes.EVO1OF1.getMaxHP());
 		minRC1.setValue(EvoTypes.EVO1OF1.getMinRC());
@@ -214,10 +331,54 @@ public class GUIController implements Initializable {
 		maxW.getItems().addAll(RCList);
 		minR.getItems().addAll(RCList);
 		maxR.getItems().addAll(RCList);
+                wrRndType.getItems().addAll(WRRndTypeList);
+                switch(Settings.settings.getWRRandomizationType())
+                {
+                    case ByWRCombination:
+                        wrRndType.setValue(WRRandomCombo);
+                        break;
+                    case ByLine:
+                        wrRndType.setValue(WRRandomLine);
+                        break;
+                    default:
+                        wrRndType.setValue(WRRandomFull);
+                        break;
+                }
+                
+                playerChar.getItems().addAll(PlayerCharList);
+                switch(Settings.settings.getPlayerChar())
+                {
+                    case defaultMark:
+                        playerChar.setValue(PlayerDefaultMark);
+                        break;
+                    case mint:
+                        playerChar.setValue(PlayerMint);
+                        break;
+                    default:
+                        playerChar.setValue(PlayerDefaultMark);
+                        break;
+                }
+                
+                illusAvail.getItems().addAll(IllusAvailList);
+                switch(Settings.settings.getIllusionCardAvailability())
+                {
+                    case cardPopOnly:
+                        illusAvail.setValue(CardPopOnly);
+                        break;
+                    case randomToSet:
+                        illusAvail.setValue(AddToSets);
+                        break;
+                    case treatAsPromo:
+                        illusAvail.setValue(TreatAsPromo);
+                        break;
+                    default:
+                        illusAvail.setValue(CardPopOnly);
+                        break;
+                }
 	}
 	
-	/** Listens to value of choice box changing */
-	private void choiceBoxesListener() {
+	/** Listens to value of controls changing */
+	private void addListeners() {
 		
 		minHP1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			
@@ -410,6 +571,25 @@ public class GUIController implements Initializable {
 				EvoTypes.EVO3OF3.setMaxRC(RCList.get(newValue.intValue()));
 			}
 		});
+                
+                wrRndType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                                if (newValue.equals(WRRandomFull))
+                                {
+                                    Settings.settings.setWRRandomizationType(Settings.wrRandomType.Full);
+                                }
+                                else if (newValue.equals(WRRandomCombo))
+                                {
+                                    Settings.settings.setWRRandomizationType(Settings.wrRandomType.ByWRCombination);
+                                }
+                                else if (newValue.equals(WRRandomLine))
+                                {
+                                    Settings.settings.setWRRandomizationType(Settings.wrRandomType.ByLine);
+                                }
+			}
+		});
 		
 		minW.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			
@@ -442,6 +622,190 @@ public class GUIController implements Initializable {
 				Settings.settings.setMaxResistances(RCList.get(newValue.intValue()));
 			}
 		});
+                
+                playerChar.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                                if (newValue.equals(PlayerDefaultMark))
+                                {
+                                    Settings.settings.setPlayerChar(Settings.playerCharacter.defaultMark);
+                                }
+                                else if (newValue.equals(PlayerMint))
+                                {
+                                    Settings.settings.setPlayerChar(Settings.playerCharacter.mint);
+                                }
+			}
+		});
+                
+                illusAvail.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                                if (newValue.equals(CardPopOnly))
+                                {
+                                    Settings.settings.setIllusionCardAvailability(Settings.illusionCardAvailability.cardPopOnly);
+                                }
+                                else if (newValue.equals(AddToSets))
+                                {
+                                    Settings.settings.setIllusionCardAvailability(Settings.illusionCardAvailability.randomToSet);
+                                }
+                                else if (newValue.equals(TreatAsPromo))
+                                {
+                                    Settings.settings.setIllusionCardAvailability(Settings.illusionCardAvailability.treatAsPromo);
+                                }
+			}
+		});
+                
+                seedVal.textProperty().addListener(new ChangeListener<String>() {
+            
+                    	@Override
+			public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                                Settings.settings.setCustomSeed(newValue);
+			}
+                });
 	}
+        
+        /** Arranges controls across vertical space.*/
+        private void doLayout()
+        {
+            double nextElementY = 21;
+            nextElementY = doCheckBoxSectionLayout(nextElementY);
+            nextElementY = doHPRCSectionLayout(nextElementY);
+            nextElementY = doWRSectionLayout(nextElementY);
+            nextElementY = doMiscSectionLayout(nextElementY);
+            
+            nextElementY += 10;
+            seedLbl.setLayoutY(nextElementY + 1);
+            seedVal.setLayoutY(nextElementY);
+        }
+        
+        private double doCheckBoxSectionLayout(double yPos)
+        {
+            double checkYIncrement = 25;
+            optionHP.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionWR.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionRC.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionMoves.setLayoutY(yPos);
+            optionFillEmpty.setLayoutY(yPos);
+            optionMatchEnergies.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionSpeed.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionTutorial.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            return yPos;
+        }
+        
+        private double doHPRCSectionLayout(double yPos)
+        {
+            double hpRcYIncrement = 32;
+            minHPLbl.setLayoutY(yPos + 6);
+            maxHPLbl.setLayoutY(yPos + 6);
+            minRCLbl.setLayoutY(yPos + 6);
+            maxRCLbl.setLayoutY(yPos + 6);
+            yPos += hpRcYIncrement;
+            minHP1.setLayoutY(yPos);
+            maxHP1.setLayoutY(yPos);
+            minRC1.setLayoutY(yPos);
+            maxRC1.setLayoutY(yPos);
+            lbl11.setLayoutY(yPos+1);
+            yPos += hpRcYIncrement;
+            minHP2.setLayoutY(yPos);
+            maxHP2.setLayoutY(yPos);
+            minRC2.setLayoutY(yPos);
+            maxRC2.setLayoutY(yPos);
+            lbl12.setLayoutY(yPos+1);
+            yPos += hpRcYIncrement;
+            minHP3.setLayoutY(yPos);
+            maxHP3.setLayoutY(yPos);
+            minRC3.setLayoutY(yPos);
+            maxRC3.setLayoutY(yPos);
+            lbl22.setLayoutY(yPos+1);
+            yPos += hpRcYIncrement;
+            minHP4.setLayoutY(yPos);
+            maxHP4.setLayoutY(yPos);
+            minRC4.setLayoutY(yPos);
+            maxRC4.setLayoutY(yPos);
+            lbl13.setLayoutY(yPos+1);
+            yPos += hpRcYIncrement;
+            minHP5.setLayoutY(yPos);
+            maxHP5.setLayoutY(yPos);
+            minRC5.setLayoutY(yPos);
+            maxRC5.setLayoutY(yPos);
+            lbl23.setLayoutY(yPos+1);
+            yPos += hpRcYIncrement;
+            minHP6.setLayoutY(yPos);
+            maxHP6.setLayoutY(yPos);
+            minRC6.setLayoutY(yPos);
+            maxRC6.setLayoutY(yPos);
+            lbl33.setLayoutY(yPos + 1);
+            yPos += hpRcYIncrement;
+            return yPos;
+        }
+        
+        private double doWRSectionLayout(double yPos)
+        {
+            double wrIncrement = 32;
+            yPos += wrIncrement - 22;
+            wrRndType.setLayoutY(yPos);
+            wrTypeLbl.setLayoutY(yPos + 1);
+            yPos += wrIncrement - 10;
+            wrMinLbl.setLayoutY(yPos + 6);
+            wrMaxLbl.setLayoutY(yPos + 6);
+            yPos += wrIncrement;
+            minW.setLayoutY(yPos);
+            maxW.setLayoutY(yPos);
+            wrNumWeakLbl.setLayoutY(yPos + 1);
+            yPos += wrIncrement;
+            minR.setLayoutY(yPos);
+            maxR.setLayoutY(yPos);
+            wrNumResLbl.setLayoutY(yPos + 1);
+            yPos += wrIncrement;
+            return yPos;
+        }
+        
+        private double doMiscSectionLayout(double yPos)
+        {
+            double miscIncrement = 32;
+            yPos += 10;
+            playerCharLbl.setLayoutY(yPos + 1);
+            playerChar.setLayoutY(yPos);
+            yPos += miscIncrement;
+            illusLbl.setLayoutY(yPos + 1);
+            illusAvail.setLayoutY(yPos);
+            yPos += miscIncrement;
+            return yPos;
+        }
+        
+        private void populateSeedField()
+        {
+            seedVal.setText(String.valueOf(RNG.getSeed()));
+        }
+        
+        /** Returns a string representing some of the configuration settings
+            used to generate the ROM. Intended for use in output filename.*/
+        public String getConfigString()
+        {
+            String config = "";
+            for (int opt = 0 ; opt < Settings.NUM_OPTIONS ; opt++)
+            {
+                config += options[opt] ? "1" : "0";
+            }
+            
+            //If Randomizing Weakness/Resistance, specify type
+            if(options[Settings.Options.WR.ordinal()])
+            {
+                config += "WR" + Settings.settings.getWRRandomizationType().ordinal();
+            }
+            
+            //Status of Illusion cards
+            config += "IL" + Settings.settings.getIllusionCardAvailability().ordinal();
+            
+            return config;
+        }
 
 }

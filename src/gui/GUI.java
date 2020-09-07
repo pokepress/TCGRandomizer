@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
+//Bare-bones GUI class that initializes window
 public class GUI extends Application {
 	
 	private Stage primaryStage;
