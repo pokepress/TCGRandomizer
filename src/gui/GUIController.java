@@ -40,7 +40,7 @@ public class GUIController implements Initializable {
         
         private static final String CardPopOnly = "Default (Card Pop! Only)";
         private static final String AddToSets = "Add randomly to in-game sets";
-        private static final String TreatAsPromo = "Treat as promo cards";
+        private static final String TreatAsPromo = "Treat as promo cards (untested)";
         
 	/* Options to randomize HP, weaknesses/resistances, retreat cost, 
            shuffle moves, default gsme speed, and skip tutorial */
