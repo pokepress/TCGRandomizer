@@ -14,15 +14,25 @@ Currently, it randomizes the following data inherent to Pokemon cards (all optio
 
 The minimum and maximum HP, retreat cost, and number of weaknesses and resistances is selectable. The HP and retreat cost ranges are selectable for 6 types of evolution classes or stages.
 
+If randomizing weakness and resistance, there are currently three options:
+*Randomize each card individually
+*Randomize each original weakness/resistance combination identically (in other words, all Pokemon with a weakness to psychic and no resistance will have the same combination in the randomized game)
+*Randomize each gen 1 evolution line uniformly. Note that Hitmonchan and Hitmonlee are considered separate, Eevee is grouped in with all its evolutions, and Surfing and Flying Pikachu will be given the same weakness and resistance as regular Pikachu. 
+
+It also provides a number of options for tweaking game behavior:
+*Default the text speed to the fastest setting and disable attack animations when starting a new file
+*Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
+*Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission)
+*Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (untested)
+
 #### <b>Current bugs or flaws</b>
 
 * (Bug) If the shuffle moves option is selected, most Pokemon names in the move descriptions will be wrong as they will still refer to the original card.
 * (Flaw) If the shuffle moves option is selected, there is a chance that a card ends up with no damage-dealing move (more common for cards with a single move slot).
+* (Flaw) If the shuffle moves option is selected, a Pokemon may wind up with a boosting move that references an attack it doesn't have.
 * (Flaw) If the shuffle moves option is selected, Call for Family and similar effects are inconsistent with the card Pokemon species.
 
 #### <b>Planned features or tweaks (in no particular order)</b>
-
-### I'm no longer working on this. Anyone is free to pick this project up and add new features or fix current issues if he/she wishes
 
 * Fix wrong Pokemon names showing in the descriptions of the shuffled moves.
 * Selectable "energy mappings" in the shuffle moves option.
@@ -30,8 +40,8 @@ The minimum and maximum HP, retreat cost, and number of weaknesses and resistanc
 * Further randomization of moves, beyond just shuffling the effects, and randomizing energy requirements and damage. Randomizing the move effects themselves may be a possibility, but further reverse engineering of the Pokemon TCG duel engine will be necessary first.
 * Randomization of types. This is related to the randomization of energy requirements and would require adjusting the decks to keep them type-consistent. 
 * Randomization of other misc Pokemon card data.
-* Option to make the randomization repeatable so that different people can generate the same changes.
 * Being able to load the Pokemon TCG ROM from the file system.
+* Increase chance of a Challendge Cup being triggrered on boot in postgame.
 
 Contributions aren't expected but would always be welcome.
 
@@ -54,4 +64,4 @@ Contributions aren't expected but would always be welcome.
 
 [TCGRandomizer.jar](TCGRandomizer.jar?raw=true)
 
-At the moment, the Pokemon TCG ROM detailed above must be in the same directory as the .jar file, and must be named <b>tcg.gbc</b>. Make sure you have a recent version of Java installed on your computer. Execute the .jar file and choose your settings. Finally, click on the "Randomize!" button to generate a randomized ROM that will named tcgrandomized.gbc.
+At the moment, the Pokemon TCG ROM detailed above must be in the same directory as the .jar file, and must be named <b>tcg.gbc</b>. Make sure you have a recent version of Java installed on your computer. Execute the .jar file and choose your settings. Finally, click on the "Randomize!" button to generate a randomized ROM that will named tcgrandomized_(seed)_(Options)_(Other Config).gbc.
