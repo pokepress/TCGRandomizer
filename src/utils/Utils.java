@@ -14,6 +14,7 @@ public class Utils {
 
 	public Utils() {}
 	
+        /** Displays a popup message.*/
 	public static void print (String str) {
 		
 		JOptionPane.showMessageDialog(null, str);
@@ -32,7 +33,7 @@ public class Utils {
 		bb2.rewind();
 	}
 	
-	/** Applies movevent [move] to ByteBuffer */
+	/** Applies movement [move] to ByteBuffer */
 	public static void move (ByteBuffer bb, int move) throws IOException {
 		
 		bb.position(bb.position() + move);
@@ -67,5 +68,13 @@ public class Utils {
 		sum += i >> 28 & 0xF;
 		return sum;		
 	}
+        
+        /** Returns a filename for the output file.
+            * @param seed seed value used to randomize the ROM
+            * @param config config string*/
+        public static String generateOutputFilename(long seed, String config)
+        {
+            return Constants.FILE_NAME_OUT + seed + "_" + config +Constants.FILE_NAME_OUT_SUFFIX;
+        }
 	
 }

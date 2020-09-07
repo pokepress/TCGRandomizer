@@ -7,6 +7,22 @@ public class RNG {
 	private static final Random rnd = new Random();
 
 	public RNG() {}
+        
+        /** Set the seed value for randomization 
+         * @param newSeed new seed value */
+        public static void setSeed(long newSeed)
+        {
+            rnd.setSeed(newSeed);
+        }
+        
+        /** Generates and returns a new seed value 
+         * @return new seed value */
+        public static long getSeed()
+        {
+            long seed = rnd.nextLong(); //Generate value for seed field in GUI
+            rnd.setSeed(seed);
+            return seed;
+        }
 		
 	/** @return a random number between min and max inclusive */
 	public static byte randomRange (int min, int max) {
