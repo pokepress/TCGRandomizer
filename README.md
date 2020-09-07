@@ -15,15 +15,15 @@ Currently, it randomizes the following data inherent to Pokemon cards (all optio
 The minimum and maximum HP, retreat cost, and number of weaknesses and resistances is selectable. The HP and retreat cost ranges are selectable for 6 types of evolution classes or stages.
 
 If randomizing weakness and resistance, there are currently three options:
-*Randomize each card individually
-*Randomize each original weakness/resistance combination identically (in other words, all Pokemon with a weakness to psychic and no resistance will have the same combination in the randomized game)
-*Randomize each gen 1 evolution line uniformly. Note that Hitmonchan and Hitmonlee are considered separate, Eevee is grouped in with all its evolutions, and Surfing and Flying Pikachu will be given the same weakness and resistance as regular Pikachu. 
+* Randomize each card individually
+* Randomize each original weakness/resistance combination identically (in other words, all Pokemon with a weakness to psychic and no resistance will have the same combination in the randomized game)
+* Randomize each gen 1 evolution line uniformly. Note that Hitmonchan and Hitmonlee are considered separate, Eevee is grouped in with all its evolutions, and Surfing and Flying Pikachu will be given the same weakness and resistance as regular Pikachu. 
 
 It also provides a number of options for tweaking game behavior:
-*Default the text speed to the fastest setting and disable attack animations when starting a new file
-*Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
-*Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission)
-*Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (untested)
+* Default the text speed to the fastest setting and disable attack animations when starting a new file
+* Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
+* Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission)
+* Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (untested)
 
 #### <b>Current bugs or flaws</b>
 
