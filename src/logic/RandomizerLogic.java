@@ -11,6 +11,7 @@ import gui.GUIController;
 import settings.EvoTypes;
 import settings.Settings;
 import settings.Settings.Options;
+import settings.Settings.wrRandomType;
 import utils.RNG;
 import utils.Utils;
 
@@ -32,16 +33,75 @@ class RandomizerLogic {
 		Utils.initTo(bbWrite, i, CardFields.HP);
 		bbWrite.put(RNG.randomRangeScale(et.getMinHP(), et.getMaxHP(), 10));
 	}
+        
+        /** Returns true if the card is exempted from HP randomization.*/
+        static boolean isHPException(int cardIndex)
+        {
+            if(cardIndex == constants.Cards.MrMime.ordinal())
+            {
+                //Mr. Mime's Invisible Wall ability makes it not be able to take
+                //more than 20 damage per turn under normal circumstances. To
+                //avoid a severely annoying card, we won't randomize its HP. 
+                return true;
+            }
+            return false;
+        }
 	
-	/** 1 or 2 weaknesses (50% each), and 0 or 1 resistance (50% each) */
-	static void randomizeWR (ByteBuffer bbWrite, int i) throws IOException {
-		
+	/** Randomizes weakness and resistance based on the settings the user 
+         * chose. Default is 1 weakness, and 0 or 1 resistances (50% each). */
+	static void randomizeWR (ByteBuffer bbWrite, int i, Settings.wrRandomType randomType, byte[] existingW, byte[] existingR) throws IOException {
 		Utils.initTo(bbWrite, i, CardFields.WEAKNESS);
-		bbWrite.put(RNG.randomWR(
-				Settings.settings.getMinWeaknesses(), Settings.settings.getMaxWeaknesses(),
-				Settings.settings.getMinResistances(), Settings.settings.getMaxResistances())
-				);
-	}
+
+                switch(randomType)
+                {
+                    case Full: //Randomize each card from scratch
+                        bbWrite.put(RNG.randomWR(
+                                        Settings.settings.getMinWeaknesses(), Settings.settings.getMaxWeaknesses(),
+                                        Settings.settings.getMinResistances(), Settings.settings.getMaxResistances())
+                                        );
+                        break;
+                    case ByWRCombination:
+                    case ByLine:
+                        int rwIdx = 0;
+
+                        if (randomType == wrRandomType.ByWRCombination)
+                        {
+                            //Randomize cards with the same original WR 
+                            //combination to the same combination
+                            rwIdx = Cards.values()[i].getWRComb();
+                        }
+                        else if (randomType == wrRandomType.ByLine)
+                        {
+                            //Randomize cards from the same gen 1 main game 
+                            //evolution line identically
+                            rwIdx = Cards.values()[i].getWRLine();
+                        }
+
+                        if(existingW[rwIdx] == -1 || existingR[rwIdx] == -1)
+                        {
+                            //Haven't seen this combination yet. Create new value.
+                             byte[] newWR = RNG.randomWR(
+                                        Settings.settings.getMinWeaknesses(), Settings.settings.getMaxWeaknesses(),
+                                        Settings.settings.getMinResistances(), Settings.settings.getMaxResistances());
+                             existingW[rwIdx] = newWR[0];
+                             existingR[rwIdx] = newWR[1];
+                             bbWrite.put(newWR);
+                        }
+                        else
+                        {
+                            //Already has been determined. Re-use prior value.
+                            byte[] newWR= new byte[2];
+                            newWR[0] = existingW[rwIdx];
+                            newWR[1] = existingR[rwIdx];
+                            bbWrite.put(newWR);
+                        }
+                        break;
+                    default:
+                        byte[] newWR= new byte[2];
+                        bbWrite.put(newWR);
+                        break;
+        	}
+        }
 	
 	/** Default values:<br>
 	 *  Evolution 1 of 1 --> Between 1 and 3 retreat cost<br>
@@ -176,6 +236,26 @@ class RandomizerLogic {
 				bbWrite.put(bbRead.array(), bbRead.position(), Constants.PKMN_MOVE_DATA_LENGTH);
 			}
 		}
+	}
+        
+        /** Generates a random set number. Upper four bytes control in-game set,
+            lower four bytes control real-world set icon.*/
+        static void randomizeSet (ByteBuffer bbRead, ByteBuffer bbWrite, int i) throws IOException {
+                Utils.initTo(bbRead, i, CardFields.SET);
+                byte cardSet = bbRead.get(); 
+                cardSet = (byte) (cardSet & 0x0f); //keep lower byte (real-world set)
+                cardSet += (byte) RNG.randomRangeScale(0, 3, 16); //Randomize upper byte (in-game set)
+		Utils.initTo(bbWrite, i, CardFields.SET);
+		bbWrite.put(cardSet);
+	}
+        
+        /** Turns the card into a promo card, making it available for
+         * Challenge Cups.*/
+        static void changeToPromo (ByteBuffer bbWrite, int i) throws IOException {
+		Utils.initTo(bbWrite, i, CardFields.RARITY);
+		bbWrite.put((byte) 0xff); //Dedicated Promo Rarity (no icon)
+                Utils.initTo(bbWrite, i, CardFields.SET);
+                bbWrite.put((byte) 0x48); //Promo Set (used for challenge cups)
 	}
 
 }
