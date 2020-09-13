@@ -251,7 +251,7 @@ class RandomizerLogic {
         
         /** Turns the card into a promo card, making it available for
          * Challenge Cups.*/
-        static void changeToPromo (ByteBuffer bbWrite, int i) throws IOException {
+        static void changeIllusionToPromo (ByteBuffer bbWrite, int i) throws IOException {
 		Utils.initTo(bbWrite, i, CardFields.RARITY);
 		bbWrite.put((byte) 0xff); //Dedicated Promo Rarity (no icon)
                 Utils.initTo(bbWrite, i, CardFields.SET);

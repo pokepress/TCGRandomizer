@@ -12,6 +12,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import constants.Constants;
+import constants.duelists.Duelist;
+import constants.duelists.Mint;
 import gui.GUIController;
 import settings.Settings.Options;
 import utils.RNG;
@@ -64,7 +66,10 @@ public class MainLogic {
                         
 			if(gui.getPlayerCharacter() == settings.Settings.playerCharacter.mint)
                         {
-                            ProgramLogic.playAsMint(fout);
+                            Duelist mnt = new Mint(fout);
+                            mnt.AdjustGameText();
+                            mnt.ReplaceCharacterPortrait();
+                            mnt.ReplaceOverworldSprite();
                         }
                         
                         if (gui.getOption(Options.REMOVETUTORIAL.ordinal()))
@@ -74,6 +79,11 @@ public class MainLogic {
                         else
                         {
                             ProgramLogic.disablePracticeMode(fout);
+                        }
+                        
+                        if (gui.getIllusionCardAvailability() == settings.Settings.illusionCardAvailability.treatAsPromo)
+                        {
+                            ProgramLogic.addIllusionToCup(fout);
                         }
                         
 			ProgramLogic.fixGlobalChecksum(chout);
