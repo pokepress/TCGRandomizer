@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="679.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GUIController">
+<AnchorPane prefHeight="704.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GUIController">
    <children>
-      <ButtonBar buttonMinWidth="75.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="621.0">
+      <ButtonBar buttonMinWidth="75.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="656.0">
         <buttons>
           <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#beginProgram" text="Randomize!" textAlignment="CENTER">
                <font>
@@ -29,6 +29,7 @@
       <CheckBox fx:id="optionMatchEnergies" layoutX="295.0" mnemonicParsing="false" onMouseClicked="#handleMatchEnergiesOptionClick" selected="false" text="Match energies to type" AnchorPane.leftAnchor="295.0"/>
       <CheckBox fx:id="optionSpeed" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleSpeedOptionClick" selected="true" text="Maximize text speed and disable attack animations" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionTutorial" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleTutorialOptionClick" selected="true" text="Remove tutorial" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionBossAntiCheat" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleBossAntiCheatOptionClick" text="Disable boss character setup cheating" AnchorPane.leftAnchor="25.0"/>
       
       <!-- HP & Retreat Cost Range Controls -->
       <ChoiceBox fx:id="minHP1" layoutX="108.0" prefWidth="75.0" AnchorPane.leftAnchor="108.0"/>

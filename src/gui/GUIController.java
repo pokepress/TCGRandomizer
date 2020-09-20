@@ -46,7 +46,7 @@ public class GUIController implements Initializable {
            shuffle moves, default gsme speed, and skip tutorial */
 	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves;
 	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
-        @FXML private CheckBox optionTutorial;
+        @FXML private CheckBox optionTutorial, optionBossAntiCheat;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
 	@FXML private Label minHPLbl, maxHPLbl, minRCLbl, maxRCLbl;
@@ -133,6 +133,11 @@ public class GUIController implements Initializable {
          * becoming a normal duel. */
         private void handleTutorialOption() {
                 setOption (Settings.Options.REMOVETUTORIAL.ordinal());
+        }
+        
+        /** Updates whether the we turn off the boss NPC setup advantage. */
+        private void handleBossAntiCheatOption() {
+                setOption (Settings.Options.CPUANTICHEAT.ordinal());
         }
         
         /** Returns the selected weakness/resistance randomization setting.*/
@@ -249,6 +254,11 @@ public class GUIController implements Initializable {
         @FXML
 	private void handleTutorialOptionClick() {	
 		setOption (Settings.Options.REMOVETUTORIAL.ordinal());
+	}
+        
+        @FXML
+	private void handleBossAntiCheatOptionClick() {	
+		setOption (Settings.Options.CPUANTICHEAT.ordinal());
 	}
 	
 	/** Initializes all choice boxes to their default values */
@@ -696,6 +706,8 @@ public class GUIController implements Initializable {
             optionSpeed.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionTutorial.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionBossAntiCheat.setLayoutY(yPos);
             yPos += checkYIncrement;
             return yPos;
         }
