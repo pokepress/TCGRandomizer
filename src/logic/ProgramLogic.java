@@ -235,6 +235,16 @@ class ProgramLogic {
                 f.writeByte(0xa1);
                 f.writeShort(0xca0a);
 	}
+        
+        /** "Boss" opponents (Club Masters, Grand Masters, and Ronald) are 
+         * able to manipulate their opening hands to ensure that they have
+         * a certain number of basics, energy, etc.. This disables that by
+         * returning immediately. */
+	static void disableBossSetupCheat(RandomAccessFile f) throws IOException {
+		
+		f.seek(0x172af);
+                f.writeByte(0xc9);
+	}
 	
 	/** Fixes the global checksum */
 	static void fixGlobalChecksum (FileChannel ch) throws IOException {

@@ -81,6 +81,11 @@ public class MainLogic {
                             ProgramLogic.disablePracticeMode(fout);
                         }
                         
+                        if (gui.getOption(Options.CPUANTICHEAT.ordinal()))
+                        {
+                            ProgramLogic.disableBossSetupCheat(fout);
+                        }
+                        
                         if (gui.getIllusionCardAvailability() == settings.Settings.illusionCardAvailability.treatAsPromo)
                         {
                             ProgramLogic.addIllusionToCup(fout);
