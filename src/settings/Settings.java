@@ -2,10 +2,10 @@ package settings;
 
 public class Settings {
 
-	public static final int NUM_OPTIONS = 8;
+	public static final int NUM_OPTIONS = 9;
 	
 	public enum Options {
-		HP, WR, RC, MOVES, FILL, MATCH, SPEED, REMOVETUTORIAL;
+		HP, WR, RC, MOVES, FILL, MATCH, SPEED, REMOVETUTORIAL, CPUANTICHEAT;
 	}
         
         /** List of possible methods for randomizing weakness and resistance. */
