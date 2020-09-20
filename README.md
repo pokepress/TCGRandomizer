@@ -24,6 +24,7 @@ It also provides a number of options for tweaking game behavior:
 * Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
 * Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission)
 * Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (available via the Challenge Cup after the two built-in Challenges)
+* Prevent boss characters (Club Masters, Grand Masters, and Ronald) from manipulating their opening hand at the start of a battle
 
 #### <b>Current bugs or flaws</b>
 
@@ -42,6 +43,7 @@ It also provides a number of options for tweaking game behavior:
 * Randomization of other misc Pokemon card data.
 * Being able to load the Pokemon TCG ROM from the file system.
 * Increase chance of a Challendge Cup being triggrered on boot in postgame.
+* Rearrange UI to be wide instead of tall.
 
 Contributions aren't expected but would always be welcome.
 
