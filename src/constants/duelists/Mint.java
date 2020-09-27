@@ -41,9 +41,6 @@ public class Mint extends constants.duelists.Duelist {
             cartFile.writeBytes("Boys don't take me seriously when we\nduel...  ");
             cartFile.seek(0x529ac);
             cartFile.writeBytes("!\nYou duel like a boy, hehe!        ");
-            
-            cartFile.seek(0x7349d);
-            cartFile.writeShort(0xe665);
     }
     
     /**Replaces the character that appears in duels, menus, etc.
@@ -292,16 +289,15 @@ public class Mint extends constants.duelists.Duelist {
         cartFile.writeShort(0x1e1e);
         cartFile.seek(0x8bfc3);
         cartFile.writeByte(0xa8);
-
-        //Palettes (I think)
-        cartFile.seek(0x900e0);
-        cartFile.writeShort(0x0000);
-        cartFile.seek(0x901e0);
-        cartFile.writeShort(0x0605);
-        cartFile.seek(0x901f0);
-        cartFile.writeShort(0x10f0);
+        
+        //SGB Palette
+        cartFile.seek(0x7349d);
+        cartFile.writeShort(0xe665);
+        
+        //GBC Palette
         cartFile.seek(0xb3ffc);
         cartFile.writeShort(0xe665);
+        //Map Cursor
         cartFile.seek(0xb7b2d);
         cartFile.writeShort(0xe665);
     }
