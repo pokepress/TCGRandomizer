@@ -18,9 +18,9 @@ public class Settings {
         /** List of possible player characters. */
         public enum playerCharacter {
             defaultMark,               //default character
-            mint                       //female character from gb2
+            mint,                      //female character from gb2
+            imakuni                    //Japanese celebrity
             //In theory, any character with a portrait and overworld sprite could be swapped.
-            //Imakuni? and Ronald would be fun choices.
         }
         
         /** Controls availability of Mew and Venusaur, normally only available 
@@ -38,7 +38,7 @@ public class Settings {
 		this.maxWeaknesses = maxWeaknesses;
 		this.minResistances = minResistances;
 		this.maxResistances = maxResistances;
-                this.wrRandomizationType = wrRandomType.Full;
+                this.wrRandomizationType = wrRandomType.ByWRCombination;
                 this.customSeed = "";
                 this.playerChar = playerCharacter.defaultMark;
                 this.illusionCardAvail = illusionCardAvailability.cardPopOnly;
