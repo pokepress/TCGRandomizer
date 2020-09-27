@@ -22,7 +22,7 @@ If randomizing weakness and resistance, there are currently three options:
 It also provides a number of options for tweaking game behavior:
 * Default the text speed to the fastest setting and disable attack animations when starting a new file
 * Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
-* Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission)
+* Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission), or Imakuni?
 * Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (available via the Challenge Cup after the two built-in Challenges)
 * Prevent boss characters (Club Masters, Grand Masters, and Ronald) from manipulating their opening hand at the start of a battle
 
@@ -43,7 +43,6 @@ It also provides a number of options for tweaking game behavior:
 * Randomization of other misc Pokemon card data.
 * Being able to load the Pokemon TCG ROM from the file system.
 * Increase chance of a Challendge Cup being triggrered on boot in postgame.
-* Rearrange UI to be wide instead of tall.
 
 Contributions aren't expected but would always be welcome.
 
@@ -61,6 +60,8 @@ Contributions aren't expected but would always be welcome.
 ![8](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/8.bmp)
 ![9](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/9.bmp)
 ![10](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/10.bmp)
+![11](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/11.png)
+![12](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/12.png)
 
 #### <b>Download</b>
 
