@@ -37,6 +37,7 @@ public class GUIController implements Initializable {
 	
         private static final String PlayerDefaultMark = "Default (Mark)";
         private static final String PlayerMint = "Mint (Card GB 2)";
+        private static final String PlayerImakuni = "Imakuni?";
         
         private static final String CardPopOnly = "Default (Card Pop! Only)";
         private static final String AddToSets = "Add randomly to in-game sets";
@@ -273,6 +274,7 @@ public class GUIController implements Initializable {
                 
                 PlayerCharList.add(PlayerDefaultMark);
                 PlayerCharList.add(PlayerMint);
+                PlayerCharList.add(PlayerImakuni);
                 
                 IllusAvailList.add(CardPopOnly);
                 IllusAvailList.add(AddToSets);
@@ -363,6 +365,9 @@ public class GUIController implements Initializable {
                         break;
                     case mint:
                         playerChar.setValue(PlayerMint);
+                        break;
+                    case imakuni:
+                        playerChar.setValue(PlayerImakuni);
                         break;
                     default:
                         playerChar.setValue(PlayerDefaultMark);
@@ -645,6 +650,10 @@ public class GUIController implements Initializable {
                                 {
                                     Settings.settings.setPlayerChar(Settings.playerCharacter.mint);
                                 }
+                                else if (newValue.equals(PlayerImakuni))
+                                {
+                                    Settings.settings.setPlayerChar(Settings.playerCharacter.imakuni);
+                                }
 			}
 		});
                 
@@ -681,6 +690,7 @@ public class GUIController implements Initializable {
         {
             double nextElementY = 21;
             nextElementY = doCheckBoxSectionLayout(nextElementY);
+            nextElementY = 11;
             nextElementY = doHPRCSectionLayout(nextElementY);
             nextElementY = doWRSectionLayout(nextElementY);
             nextElementY = doMiscSectionLayout(nextElementY);
@@ -695,12 +705,14 @@ public class GUIController implements Initializable {
             double checkYIncrement = 25;
             optionHP.setLayoutY(yPos);
             yPos += checkYIncrement;
-            optionWR.setLayoutY(yPos);
-            yPos += checkYIncrement;
             optionRC.setLayoutY(yPos);
             yPos += checkYIncrement;
+            optionWR.setLayoutY(yPos);
+            yPos += checkYIncrement;
             optionMoves.setLayoutY(yPos);
+            yPos += checkYIncrement;
             optionFillEmpty.setLayoutY(yPos);
+            yPos += checkYIncrement;
             optionMatchEnergies.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionSpeed.setLayoutY(yPos);
