@@ -12,8 +12,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import constants.Constants;
-import constants.duelists.Duelist;
-import constants.duelists.Mint;
+import constants.duelists.*;
 import gui.GUIController;
 import settings.Settings.Options;
 import utils.RNG;
@@ -64,12 +63,9 @@ public class MainLogic {
                         
                         if (gui.getOption(Options.SPEED.ordinal())) ProgramLogic.maxTextSpeedNoAnimations(fout);
                         
-			if(gui.getPlayerCharacter() == settings.Settings.playerCharacter.mint)
+			if(gui.getPlayerCharacter() != settings.Settings.playerCharacter.defaultMark)
                         {
-                            Duelist mnt = new Mint(fout);
-                            mnt.AdjustGameText();
-                            mnt.ReplaceCharacterPortrait();
-                            mnt.ReplaceOverworldSprite();
+                            Duelist.customizeCharacter(gui.getPlayerCharacter(), fout);
                         }
                         
                         if (gui.getOption(Options.REMOVETUTORIAL.ordinal()))
