@@ -47,7 +47,7 @@ public class GUIController implements Initializable {
            shuffle moves, default gsme speed, and skip tutorial */
 	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves;
 	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
-        @FXML private CheckBox optionTutorial, optionBossAntiCheat;
+        @FXML private CheckBox optionTutorial, optionBossAntiCheat, optionRebalanceTrainers;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
 	@FXML private Label minHPLbl, maxHPLbl, minRCLbl, maxRCLbl;
@@ -139,6 +139,11 @@ public class GUIController implements Initializable {
         /** Updates whether the we turn off the boss NPC setup advantage. */
         private void handleBossAntiCheatOption() {
                 setOption (Settings.Options.CPUANTICHEAT.ordinal());
+        }
+        
+        /** Updates whether the we turn off the boss NPC setup advantage. */
+        private void handleRebalanceTrainersOption() {
+                setOption (Settings.Options.REBALANCETRAINERS.ordinal());
         }
         
         /** Returns the selected weakness/resistance randomization setting.*/
@@ -260,6 +265,11 @@ public class GUIController implements Initializable {
         @FXML
 	private void handleBossAntiCheatOptionClick() {	
 		setOption (Settings.Options.CPUANTICHEAT.ordinal());
+	}
+        
+        @FXML
+	private void handleRebalanceTrainersClick() {	
+		setOption (Settings.Options.REBALANCETRAINERS.ordinal());
 	}
 	
 	/** Initializes all choice boxes to their default values */
@@ -720,6 +730,8 @@ public class GUIController implements Initializable {
             optionTutorial.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionBossAntiCheat.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionRebalanceTrainers.setLayoutY(yPos);
             yPos += checkYIncrement;
             return yPos;
         }
