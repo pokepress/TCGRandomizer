@@ -20,6 +20,7 @@ import utils.Utils;
 class ProgramLogic {
 		
 	private static final GUIController gui = GUIController.getGuiController();
+        private static final int bytesToAddFlip = 11; //Number of bytes needed to add a coin flip to an effect
 
 	ProgramLogic() {}
 	
@@ -245,6 +246,125 @@ class ProgramLogic {
 		f.seek(0x172af);
                 f.writeByte(0xc9);
 	}
+        
+        /** Weakens Gust of Wind by requiring the user to flip heads for it to
+         work.*/
+        static int nerfGustOfWind(RandomAccessFile f, int effectStartAddress) throws IOException
+        {
+            if (effectStartAddress + bytesToAddFlip - 1 > constants.Constants.UNUSED_EFFECT_BEHAVIOR_END)
+            {
+                throw new IOException("Unable to edit Gust of Wind due to lack of effect codespace.");
+            }
+            //Alter card name to clue in player.
+            f.seek(0x643c3);
+            f.writeBytes("PKMN Catcher");
+            //Update card text.
+            f.seek(0x643d1);
+            f.writeBytes("Flip a coin. If heads, switch your\nopponent's active Pok`mon.");
+            f.writeByte(0x00); //Terminate String
+            f.seek(0x18f99); //overwrite address for "damage" phase of card execution
+            short bank1Address = utils.Utils.cartAddressToBank1Address(effectStartAddress);
+            f.writeShort(utils.Utils.swapAddressBytes(bank1Address));
+            //Flips a coin, if heads, proceeds to normal "damage" phase at 7e90
+            f.seek(effectStartAddress);
+            f.writeLong(0x11ef00cd8a40d0cdL);
+            f.writeShort(0x907e);
+            f.writeByte(0xc9);
+            return (int)f.getFilePointer();
+        }
+        
+        /** Weakens Energy Removal by requiring the user to flip heads for it to
+         work.*/
+        static int nerfEnergyRemoval(RandomAccessFile f, int effectStartAddress) throws IOException
+        {
+            if (effectStartAddress + bytesToAddFlip - 1 > constants.Constants.UNUSED_EFFECT_BEHAVIOR_END)
+            {
+                throw new IOException("Unable to edit Energy Removal due to lack of effect codespace.");
+            }
+            //Alter card name to clue in player.
+            f.seek(0x63d28);
+            f.writeBytes("Crushing Hamr.");
+            f.writeByte(0x00); //Terminate String
+            //Update card text.
+            f.seek(0x63d38);
+            f.writeBytes("Flip. If heads, discard an Energy\ncard from 1 of your opponent's\nPok`mon.");
+            f.writeByte(0x00); //Terminate String
+            f.seek(0x18e87); //overwrite address for "damage" phase of card execution
+            short bank1Address = utils.Utils.cartAddressToBank1Address(effectStartAddress);
+            f.writeShort(utils.Utils.swapAddressBytes(bank1Address));
+            f.seek(0x2f276);
+            //Flips a coin, if heads, proceeds to normal "damage" phase at 7e90
+            f.seek(effectStartAddress);
+            f.writeLong(0x11ef00cd8a40d0cdL);
+            f.writeShort(0x7372);
+            f.writeByte(0xc9);
+            return (int)f.getFilePointer();
+        }
+        
+        /** Weakens Super Energy Removal by making it a 1-to-1 exchange.*/
+        static void nerfSuperEnergyRemoval(RandomAccessFile f) throws IOException
+        {
+            //Alter card name to clue in player.
+            f.seek(0x63d87);
+            f.writeBytes("Equal");
+            //Update card text.
+            f.seek(0x63e09);
+            f.writeBytes("1 Energy card attached to it.\nDiscard that Energy card.");
+            f.writeByte(0x00); //Terminate String
+            //Update UI numbers
+            f.seek(0x2fd26);
+            f.writeByte(0x01);
+            f.seek(0x2fd40);
+            f.writeByte(0x01);
+            //Alter comparison value so process stops after 1 energy is selected
+            f.seek(0x2fd5a);
+            f.writeByte(0x04);
+            //Prevent multiple energies fron being removed by CPU
+            f.seek(0x2fd86);
+            f.writeShort(0x0000);
+        }
+        
+        /** Makes Gambler safer by switching between 7 and 4 instead of 8 and 1.*/
+        static void makeGamblerSafer(RandomAccessFile f) throws IOException
+        {
+            //Update flip text
+            f.seek(0x37f3b);
+            f.writeBytes("7");
+            f.seek(0x37f4e);
+            f.writeBytes("4.");
+            f.writeByte(0x00); //Terminate String
+            //Alter card name to clue in player.
+            f.seek(0x648ee);
+            f.writeBytes("Birch O");
+            //Update card text.
+            f.seek(0x64935);
+            f.writeBytes("7");
+            f.seek(0x6494d);
+            f.writeBytes("4.");
+            f.writeByte(0x00); //Terminate String
+            //Change draw quantities
+            f.seek(0x2f423);
+            f.writeByte(0x07);
+            f.seek(0x2f42a);
+            f.writeByte(0x04);
+        }
+        
+        /** Makes Professor Oak less powerful by drawing 5 cards instead of 7.*/
+        static void nerfProfessorOak(RandomAccessFile f) throws IOException
+        {
+            //Alter card name to clue in player.
+            f.seek(0x6342e);
+            //No clever name yet.
+            //Update card text.
+            f.seek(0x6345a);
+            f.writeBytes("5");
+            f.seek(0x6494d);
+            //Change draw quantities
+            f.seek(0x2f3b8);
+            f.writeByte(0x05);
+            f.seek(0x2f3bd);
+            f.writeByte(0x05);
+        }
 	
 	/** Fixes the global checksum */
 	static void fixGlobalChecksum (FileChannel ch) throws IOException {

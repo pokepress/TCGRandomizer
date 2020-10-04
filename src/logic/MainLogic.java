@@ -28,6 +28,8 @@ public class MainLogic {
                 
                 long seed = gui.getSeed();
                 
+                int eventCodeFreeSpacePointer = Constants.UNUSED_EFFECT_BEHAVIOR_START;
+                
                 if(seed != 0)
                 {
                     RNG.setSeed(gui.getSeed());
@@ -63,11 +65,6 @@ public class MainLogic {
                         
                         if (gui.getOption(Options.SPEED.ordinal())) ProgramLogic.maxTextSpeedNoAnimations(fout);
                         
-			if(gui.getPlayerCharacter() != settings.Settings.playerCharacter.defaultMark)
-                        {
-                            Duelist.customizeCharacter(gui.getPlayerCharacter(), fout);
-                        }
-                        
                         if (gui.getOption(Options.REMOVETUTORIAL.ordinal()))
                         {
                             ProgramLogic.removePracticeBattle(fout);
@@ -85,6 +82,20 @@ public class MainLogic {
                         if (gui.getIllusionCardAvailability() == settings.Settings.illusionCardAvailability.treatAsPromo)
                         {
                             ProgramLogic.addIllusionToCup(fout);
+                        }
+                        
+                        if (gui.getOption(Options.REBALANCETRAINERS.ordinal()))
+                        {
+                            eventCodeFreeSpacePointer = ProgramLogic.nerfEnergyRemoval(fout, eventCodeFreeSpacePointer);
+                            eventCodeFreeSpacePointer = ProgramLogic.nerfGustOfWind(fout, eventCodeFreeSpacePointer);
+                            ProgramLogic.nerfSuperEnergyRemoval(fout);
+                            ProgramLogic.makeGamblerSafer(fout);
+                            ProgramLogic.nerfProfessorOak(fout);
+                        }
+                        
+                        if(gui.getPlayerCharacter() != settings.Settings.playerCharacter.defaultMark)
+                        {
+                            Duelist.customizeCharacter(gui.getPlayerCharacter(), fout);
                         }
                         
 			ProgramLogic.fixGlobalChecksum(chout);
