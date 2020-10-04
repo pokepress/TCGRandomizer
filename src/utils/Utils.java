@@ -76,5 +76,24 @@ public class Utils {
         {
             return Constants.FILE_NAME_OUT + seed + "_" + config +Constants.FILE_NAME_OUT_SUFFIX;
         }
+        
+        /**Converts a cartridge address in bank 2+ to the equivalent switched
+         * bank address (0x4000-0x7fff).
+         * @param cartAddress ROM address
+         * @return two-byte representation of address in the switchable bank
+         */
+        public static short cartAddressToBank1Address(int cartAddress)
+        {
+           return (short) (0x4000 | (cartAddress & 0x3fff)); 
+        }
+        
+        /** Swaps the high and low address bytes as required by many Z80 operations.*/
+        public static short swapAddressBytes(short addressBytes)
+        {
+            short out = 0;
+            out |= (addressBytes & 0xff00) >>> 8;
+            out |= (addressBytes & 0x00ff) << 8;
+            return out;
+        }
 	
 }
