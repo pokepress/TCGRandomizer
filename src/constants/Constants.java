@@ -27,4 +27,7 @@ public class Constants {
 	public static final int PKMN_MOVE_DATA_LENGTH   = MoveFields.END.getOffset() - MoveFields.START.getOffset();
 	public static final int TRN_CARD_DATA_LENGTH    = 0x0e;
 	public static final int ENERGY_CARD_DATA_LENGTH = 0x0e;
+        public static final int UNUSED_EFFECT_BEHAVIOR_START = 0x2ff03; //253 Bytes of extra effect code space
+        public static final int UNUSED_EFFECT_BEHAVIOR_END = 0x2ffff;
+        
 }
