@@ -26,10 +26,10 @@ It also provides a number of options for tweaking game behavior:
 * Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (available via the Challenge Cup after the two built-in Challenges)
 * Prevent boss characters (Club Masters, Grand Masters, and Ronald) from manipulating their opening hand at the start of a battle
 * Adjust some Trainer cards to be more balanced:
-** Adds a flip to Energy Removal (changes to "Crushing Hamr.") and Gust of Wind (changes to "PKMN Catcher")
-** Makes Super Energy Removal (changes to "Equal Energy Removal") a 1-to-1 exchange
-** Draw 5 on Professor Oak instad of 7
-** Gambler (Changes to "Birch O") draws 7 (heads) or 4 (tails) cards intead of 8/1
+* * Adds a flip to Energy Removal (changes to "Crushing Hamr.") and Gust of Wind (changes to "PKMN Catcher")
+* * Makes Super Energy Removal (changes to "Equal Energy Removal") a 1-to-1 exchange
+* * Draw 5 on Professor Oak instad of 7
+* * Gambler (Changes to "Birch O") draws 7 (heads) or 4 (tails) cards intead of 8/1
 
 #### <b>Current bugs or flaws</b>
 
