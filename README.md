@@ -29,7 +29,7 @@ It also provides a number of options for tweaking game behavior:
   * Adds a flip to Energy Removal (changes to "Crushing Hamr.") and Gust of Wind (changes to "PKMN Catcher")
   * Makes Super Energy Removal (changes to "Equal Energy Removal") a 1-to-1 exchange
   * Draw 5 on Professor Oak instad of 7
-  * Gambler (Changes to "Birch O") draws 7 (heads) or 4 (tails) cards intead of 8/1
+  * Gambler (changes to "Birch O") draws 7 (heads) or 4 (tails) cards instead of 8/1
 
 #### <b>Current bugs or flaws</b>
 
@@ -68,7 +68,7 @@ Contributions aren't expected but would always be welcome.
 ![10](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/10.bmp)
 ![11](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/11.png)
 ![12](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/12.png)
-![12](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/13.png)
+![13](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/13.png)
 
 #### <b>Download</b>
 
