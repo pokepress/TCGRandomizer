@@ -11,8 +11,8 @@ public class Fields {
 		GFX           (1),
 		NAME          (3),
 		RARITY        (5),
-                /** Set uses the upper 4 bits to represent the in-game set and 
-                   the lower four bits to represent the real-world set:
+                /** Set uses the upper nybble to represent the in-game set and 
+                   the lower nybble to represent the real-world set:
                     Low Bits: 0-Base 1-Jungle 2-Fossil 7-GB
                     High Bits: 0-Colosseum 1-Evolution 2-Mystery 3-Laboratory
                     Grand Master Birds/Illusion Cards: 0x47
