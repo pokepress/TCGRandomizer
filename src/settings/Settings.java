@@ -13,7 +13,8 @@ public class Settings {
         public enum wrRandomType {
             Full,               //Each card is randomized individually
             ByWRCombination,    //Each original WR combination is randomized to the same value
-            ByLine              //Each gen 1 main game evolution line is randomized individually
+            ByLine,             //Each gen 1 main game evolution line is randomized individually
+            None                //No cards have weakness or resistance
         }
         
         /** List of possible player characters. */
