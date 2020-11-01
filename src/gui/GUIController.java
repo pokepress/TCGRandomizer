@@ -34,6 +34,7 @@ public class GUIController implements Initializable {
         private static final String WRRandomFull = "Full-Randomize each card individually";
         private static final String WRRandomCombo = "Identically randomize within each original weakness/resistance combination";
         private static final String WRRandomLine = "Identically randomize within each gen 1 main game evolution line";
+        private static final String WRRandomNone = "Remove weakness and resistance";
 	
         private static final String PlayerDefaultMark = "Default (Mark)";
         private static final String PlayerMint = "Mint (Card GB 2)";
@@ -87,7 +88,7 @@ public class GUIController implements Initializable {
 	
         /** Returns the current status of the specified option.*/
 	public boolean getOption (int which) {
-		return options[which];
+		return getGuiController().options[which];
 	}
 
         /** Toggles the status of the specified option.*/
@@ -211,12 +212,30 @@ public class GUIController implements Initializable {
 	@FXML
 	private void handleWROptionClick() {
 		handleWROption();
-		minW.setDisable(minW.isDisable()^true);
-		maxW.setDisable(maxW.isDisable()^true);
-		minR.setDisable(minR.isDisable()^true);
-		maxR.setDisable(maxR.isDisable()^true);
-                wrRndType.setDisable(wrRndType.isDisable()^true);
+		updateWREnabledStatus();
 	}
+        
+        /**Updates Weakness/Resistance UI on settings change */
+        private void updateWREnabledStatus()
+        {
+            if(getOption(Settings.Options.WR.ordinal()))
+            {
+                boolean removingWR = Settings.settings.getWRRandomizationType() == Settings.wrRandomType.None;
+                minW.setDisable(removingWR);
+		maxW.setDisable(removingWR);
+		minR.setDisable(removingWR);
+		maxR.setDisable(removingWR);
+                wrRndType.setDisable(false);
+            }
+            else
+            {
+                minW.setDisable(true);
+		maxW.setDisable(true);
+		minR.setDisable(true);
+		maxR.setDisable(true);
+                wrRndType.setDisable(true);
+            }
+        }
 	
 	@FXML
 	private void handleRCOptionClick() {	
@@ -281,6 +300,7 @@ public class GUIController implements Initializable {
                 WRRndTypeList.add(WRRandomFull);
                 WRRndTypeList.add(WRRandomCombo);
                 WRRndTypeList.add(WRRandomLine);
+                WRRndTypeList.add(WRRandomNone);
                 
                 PlayerCharList.add(PlayerDefaultMark);
                 PlayerCharList.add(PlayerMint);
@@ -361,6 +381,9 @@ public class GUIController implements Initializable {
                         break;
                     case ByLine:
                         wrRndType.setValue(WRRandomLine);
+                        break;
+                    case None:
+                        wrRndType.setValue(WRRandomNone);
                         break;
                     default:
                         wrRndType.setValue(WRRandomFull);
@@ -601,6 +624,7 @@ public class GUIController implements Initializable {
 			
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                                
                                 if (newValue.equals(WRRandomFull))
                                 {
                                     Settings.settings.setWRRandomizationType(Settings.wrRandomType.Full);
@@ -613,6 +637,12 @@ public class GUIController implements Initializable {
                                 {
                                     Settings.settings.setWRRandomizationType(Settings.wrRandomType.ByLine);
                                 }
+                                else if (newValue.equals(WRRandomNone))
+                                {
+                                    Settings.settings.setWRRandomizationType(Settings.wrRandomType.None);
+                                }
+                                
+                                updateWREnabledStatus();
 			}
 		});
 		
