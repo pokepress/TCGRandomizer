@@ -335,7 +335,7 @@ class ProgramLogic {
             f.writeByte(0x00); //Terminate String
             //Alter card name to clue in player.
             f.seek(0x648ee);
-            f.writeBytes("Birch O");
+            f.writeBytes("Birch O"); //Based on Birch's Observations
             //Update card text.
             f.seek(0x64935);
             f.writeBytes("7");

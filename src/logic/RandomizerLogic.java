@@ -96,6 +96,7 @@ class RandomizerLogic {
                             bbWrite.put(newWR);
                         }
                         break;
+                    case None:
                     default:
                         byte[] newWR= new byte[2];
                         bbWrite.put(newWR);
@@ -238,19 +239,19 @@ class RandomizerLogic {
 		}
 	}
         
-        /** Generates a random set number. Upper four bytes control in-game set,
-            lower four bytes control real-world set icon.*/
+        /** Generates a random set number. Upper nybble controls in-game set,
+            lower nybble controls real-world set icon.*/
         static void randomizeSet (ByteBuffer bbRead, ByteBuffer bbWrite, int i) throws IOException {
                 Utils.initTo(bbRead, i, CardFields.SET);
                 byte cardSet = bbRead.get(); 
-                cardSet = (byte) (cardSet & 0x0f); //keep lower byte (real-world set)
-                cardSet += (byte) RNG.randomRangeScale(0, 3, 16); //Randomize upper byte (in-game set)
+                cardSet = (byte) (cardSet & 0x0f); //keep lower nybble (real-world set)
+                cardSet += (byte) RNG.randomRangeScale(0, 3, 16); //Randomize upper nybble (in-game set)
 		Utils.initTo(bbWrite, i, CardFields.SET);
 		bbWrite.put(cardSet);
 	}
         
-        /** Turns the card into a promo card, making it available for
-         * Challenge Cups.*/
+        /** Turns the card into a promo card. See ProgramLogic.addIllusionToCup
+         for how we actually make them available.*/
         static void changeIllusionToPromo (ByteBuffer bbWrite, int i) throws IOException {
 		Utils.initTo(bbWrite, i, CardFields.RARITY);
 		bbWrite.put((byte) 0xff); //Dedicated Promo Rarity (no icon)
