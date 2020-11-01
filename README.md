@@ -18,6 +18,7 @@ If randomizing weakness and resistance, there are currently three options:
 * Randomize each card individually
 * Randomize each original weakness/resistance combination identically (in other words, all Pokemon with a weakness to psychic and no resistance will have the same combination in the randomized game)
 * Randomize each gen 1 evolution line uniformly. Note that Hitmonchan and Hitmonlee are considered separate, Eevee is grouped in with all its evolutions, and Surfing and Flying Pikachu will be given the same weakness and resistance as regular Pikachu. 
+* Remove weakness and resistance for all cards
 
 It also provides a number of options for tweaking game behavior:
 * Default the text speed to the fastest setting and disable attack animations when starting a new file
