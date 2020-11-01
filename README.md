@@ -14,7 +14,7 @@ Currently, it randomizes the following data inherent to Pokemon cards (all optio
 
 The minimum and maximum HP, retreat cost, and number of weaknesses and resistances is selectable. The HP and retreat cost ranges are selectable for 6 types of evolution classes or stages.
 
-If randomizing weakness and resistance, there are currently three options:
+If randomizing weakness and resistance, there are currently four options:
 * Randomize each card individually
 * Randomize each original weakness/resistance combination identically (in other words, all Pokemon with a weakness to psychic and no resistance will have the same combination in the randomized game)
 * Randomize each gen 1 evolution line uniformly. Note that Hitmonchan and Hitmonlee are considered separate, Eevee is grouped in with all its evolutions, and Surfing and Flying Pikachu will be given the same weakness and resistance as regular Pikachu. 
