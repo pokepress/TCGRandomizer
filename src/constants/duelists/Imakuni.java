@@ -36,7 +36,7 @@ public class Imakuni extends constants.duelists.Duelist {
             cartFile.writeShort(0x0344); //U
             cartFile.writeShort(0x03bb); //?
     }
-    /**Replaces the character that appears in duels, menus, etc.*/
+    
         /**Replaces the character that appears in duels, menus, etc.
      * @throws java.io.IOException.*/
     @Override
@@ -74,7 +74,7 @@ public class Imakuni extends constants.duelists.Duelist {
             //Map cursor
             cartFile.seek(0xb7b2d);
             /*Technically, "light" would be the equivalent color, but I think
-            this looks beeter*/
+            this looks better*/
             cartFile.writeShort(ImakuniDark);
     }
 }
