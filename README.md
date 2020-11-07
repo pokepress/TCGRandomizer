@@ -24,6 +24,7 @@ It also provides a number of options for tweaking game behavior:
 * Default the text speed to the fastest setting and disable attack animations when starting a new file
 * Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
 * Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission), or Imakuni?
+* Choose a different set of graphics for the in-game coin
 * Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (available via the Challenge Cup after the two built-in Challenges)
 * Prevent boss characters (Club Masters, Grand Masters, and Ronald) from manipulating their opening hand at the start of a battle
 * Adjust some Trainer cards to be more balanced:
@@ -38,6 +39,7 @@ It also provides a number of options for tweaking game behavior:
 * (Flaw) If the shuffle moves option is selected, there is a chance that a card ends up with no damage-dealing move (more common for cards with a single move slot).
 * (Flaw) If the shuffle moves option is selected, a Pokemon may wind up with a boosting move that references an attack it doesn't have.
 * (Flaw) If the shuffle moves option is selected, Call for Family and similar effects are inconsistent with the card Pokemon species.
+* (Flaw) I haven't been able to find where the palette used for the in-game coin is yet, so alternate coins still have the same color scheme.
 
 #### <b>Planned features or tweaks (in no particular order)</b>
 
@@ -48,8 +50,8 @@ It also provides a number of options for tweaking game behavior:
 * Randomization of types. This is related to the randomization of energy requirements and would require adjusting the decks to keep them type-consistent. 
 * Randomization of other misc Pokemon card data.
 * Being able to load the Pokemon TCG ROM from the file system.
-* Increase chance of a Challendge Cup being triggrered on boot in postgame.
-* Ability to change graphics for in-game coin.
+* Increase chance of a Challenge Cup being triggrered on boot in postgame.
+* Additional options for player character and in-game coin.
 
 Contributions aren't expected but would always be welcome.
 
@@ -70,6 +72,7 @@ Contributions aren't expected but would always be welcome.
 ![11](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/11.png)
 ![12](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/12.png)
 ![13](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/13.png)
+![14](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/14.png)
 
 #### <b>Download</b>
 
