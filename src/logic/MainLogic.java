@@ -12,8 +12,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import constants.Constants;
+import constants.coins.Coin;
 import constants.duelists.*;
 import gui.GUIController;
+import settings.Settings;
 import settings.Settings.Options;
 import utils.RNG;
 import utils.Utils;
@@ -96,6 +98,11 @@ public class MainLogic {
                         if(gui.getPlayerCharacter() != settings.Settings.playerCharacter.defaultMark)
                         {
                             Duelist.customizeCharacter(gui.getPlayerCharacter(), fout);
+                        }
+                        
+                        if(gui.getCoin() != settings.Settings.coin.defaultPikachu)
+                        {
+                            Coin.customizeCoin(gui.getCoin(), fout);
                         }
                         
 			ProgramLogic.fixGlobalChecksum(chout);
