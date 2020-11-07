@@ -25,6 +25,14 @@ public class Settings {
             //In theory, any character with a portrait and overworld sprite could be swapped.
         }
         
+        /** List of possible coin graphics. */
+        public enum coin {
+            defaultPikachu,               //default coin
+            grassMedal,
+            fireMedal,
+            waterMedal,
+        }
+        
         /** Controls availability of Mew and Venusaur, normally only available 
          * via Card Pop!.*/
         public enum illusionCardAvailability {
@@ -43,6 +51,7 @@ public class Settings {
                 this.wrRandomizationType = wrRandomType.ByWRCombination;
                 this.customSeed = "";
                 this.playerChar = playerCharacter.defaultMark;
+                this.playerCoin = coin.defaultPikachu;
                 this.illusionCardAvail = illusionCardAvailability.cardPopOnly;
 	}
 	
@@ -52,6 +61,7 @@ public class Settings {
 	private int maxResistances;
         private wrRandomType wrRandomizationType;
         private playerCharacter playerChar;
+        private coin playerCoin;
         private illusionCardAvailability illusionCardAvail;
         
         private String customSeed;
@@ -110,6 +120,14 @@ public class Settings {
         
         public void setPlayerChar(playerCharacter character) {
 		this.playerChar = character;
+	}
+        
+        public coin getCoin() {
+		return playerCoin;
+	}
+        
+        public void setCoin(coin coin) {
+		this.playerCoin = coin;
 	}
         
         public illusionCardAvailability getIllusionCardAvailability() {
