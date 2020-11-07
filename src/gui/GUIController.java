@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -29,6 +28,7 @@ public class GUIController implements Initializable {
 	private List<Integer> RCList = new ArrayList<Integer>();
         private List<String> WRRndTypeList = new ArrayList<String>();
         private List<String> PlayerCharList = new ArrayList<String>();
+        private List<String> PlayerCoinList = new ArrayList<String>();
         private List<String> IllusAvailList = new ArrayList<String>();
         
         private static final String WRRandomFull = "Full-Randomize each card individually";
@@ -39,6 +39,11 @@ public class GUIController implements Initializable {
         private static final String PlayerDefaultMark = "Default (Mark)";
         private static final String PlayerMint = "Mint (Card GB 2)";
         private static final String PlayerImakuni = "Imakuni?";
+        
+        private static final String CoinDefaultPikachu = "Default (Pikachu)";
+        private static final String CoinGrassMedal = "Grass Medal";
+        private static final String CoinFireMedal = "Fire Medal";
+        private static final String CoinWaterMedal = "Water Medal";
         
         private static final String CardPopOnly = "Default (Card Pop! Only)";
         private static final String AddToSets = "Add randomly to in-game sets";
@@ -64,8 +69,9 @@ public class GUIController implements Initializable {
         @FXML private ChoiceBox<String> wrRndType;
         
         /* Miscellaneous options*/
-        @FXML private Label playerCharLbl, illusLbl;
+        @FXML private Label playerCharLbl, illusLbl, playerCoinLbl;
         @FXML private ChoiceBox<String> playerChar;
+        @FXML private ChoiceBox<String> playerCoin;
         @FXML private ChoiceBox<String> illusAvail;
         
         /* Randomizer seed*/
@@ -155,6 +161,11 @@ public class GUIController implements Initializable {
         /** Returns the selected player character setting.*/
         public Settings.playerCharacter getPlayerCharacter () {
 		return Settings.settings.getPlayerChar();
+	}
+        
+        /** Returns the selected coin setting.*/
+        public Settings.coin getCoin () {
+		return Settings.settings.getCoin();
 	}
         
         /** Returns the selected illusion card setting.*/
@@ -306,6 +317,11 @@ public class GUIController implements Initializable {
                 PlayerCharList.add(PlayerMint);
                 PlayerCharList.add(PlayerImakuni);
                 
+                PlayerCoinList.add(CoinDefaultPikachu);
+                PlayerCoinList.add(CoinGrassMedal);
+                PlayerCoinList.add(CoinFireMedal);
+                PlayerCoinList.add(CoinWaterMedal);
+                
                 IllusAvailList.add(CardPopOnly);
                 IllusAvailList.add(AddToSets);
                 IllusAvailList.add(TreatAsPromo);
@@ -404,6 +420,26 @@ public class GUIController implements Initializable {
                         break;
                     default:
                         playerChar.setValue(PlayerDefaultMark);
+                        break;
+                }
+                
+                playerCoin.getItems().addAll(PlayerCoinList);
+                switch(Settings.settings.getCoin())
+                {
+                    case defaultPikachu:
+                        playerCoin.setValue(CoinDefaultPikachu);
+                        break;
+                    case grassMedal:
+                        playerCoin.setValue(CoinGrassMedal);
+                        break;
+                    case fireMedal:
+                        playerCoin.setValue(CoinFireMedal);
+                        break;
+                    case waterMedal:
+                        playerCoin.setValue(CoinWaterMedal);
+                        break;
+                    default:
+                        playerCoin.setValue(CoinDefaultPikachu);
                         break;
                 }
                 
@@ -697,6 +733,29 @@ public class GUIController implements Initializable {
 			}
 		});
                 
+                playerCoin.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue) {
+                                if (newValue.equals(CoinDefaultPikachu))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.defaultPikachu);
+                                }
+                                else if (newValue.equals(CoinGrassMedal))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.grassMedal);
+                                }
+                                else if (newValue.equals(CoinFireMedal))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.fireMedal);
+                                }
+                                else if (newValue.equals(CoinWaterMedal))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.waterMedal);
+                                }
+			}
+		});
+                
                 illusAvail.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			
 			@Override
@@ -735,8 +794,7 @@ public class GUIController implements Initializable {
             nextElementY = doWRSectionLayout(nextElementY);
             nextElementY = doMiscSectionLayout(nextElementY);
             
-            nextElementY += 10;
-            seedLbl.setLayoutY(nextElementY + 1);
+            seedLbl.setLayoutY(nextElementY);
             seedVal.setLayoutY(nextElementY);
         }
         
@@ -778,13 +836,13 @@ public class GUIController implements Initializable {
             maxHP1.setLayoutY(yPos);
             minRC1.setLayoutY(yPos);
             maxRC1.setLayoutY(yPos);
-            lbl11.setLayoutY(yPos+1);
+            lbl11.setLayoutY(yPos);
             yPos += hpRcYIncrement;
             minHP2.setLayoutY(yPos);
             maxHP2.setLayoutY(yPos);
             minRC2.setLayoutY(yPos);
             maxRC2.setLayoutY(yPos);
-            lbl12.setLayoutY(yPos+1);
+            lbl12.setLayoutY(yPos);
             yPos += hpRcYIncrement;
             minHP3.setLayoutY(yPos);
             maxHP3.setLayoutY(yPos);
@@ -796,19 +854,19 @@ public class GUIController implements Initializable {
             maxHP4.setLayoutY(yPos);
             minRC4.setLayoutY(yPos);
             maxRC4.setLayoutY(yPos);
-            lbl13.setLayoutY(yPos+1);
+            lbl13.setLayoutY(yPos);
             yPos += hpRcYIncrement;
             minHP5.setLayoutY(yPos);
             maxHP5.setLayoutY(yPos);
             minRC5.setLayoutY(yPos);
             maxRC5.setLayoutY(yPos);
-            lbl23.setLayoutY(yPos+1);
+            lbl23.setLayoutY(yPos);
             yPos += hpRcYIncrement;
             minHP6.setLayoutY(yPos);
             maxHP6.setLayoutY(yPos);
             minRC6.setLayoutY(yPos);
             maxRC6.setLayoutY(yPos);
-            lbl33.setLayoutY(yPos + 1);
+            lbl33.setLayoutY(yPos);
             yPos += hpRcYIncrement;
             return yPos;
         }
@@ -818,18 +876,18 @@ public class GUIController implements Initializable {
             double wrIncrement = 32;
             yPos += wrIncrement - 22;
             wrRndType.setLayoutY(yPos);
-            wrTypeLbl.setLayoutY(yPos + 1);
+            wrTypeLbl.setLayoutY(yPos);
             yPos += wrIncrement - 10;
             wrMinLbl.setLayoutY(yPos + 6);
             wrMaxLbl.setLayoutY(yPos + 6);
             yPos += wrIncrement;
             minW.setLayoutY(yPos);
             maxW.setLayoutY(yPos);
-            wrNumWeakLbl.setLayoutY(yPos + 1);
+            wrNumWeakLbl.setLayoutY(yPos);
             yPos += wrIncrement;
             minR.setLayoutY(yPos);
             maxR.setLayoutY(yPos);
-            wrNumResLbl.setLayoutY(yPos + 1);
+            wrNumResLbl.setLayoutY(yPos);
             yPos += wrIncrement;
             return yPos;
         }
@@ -838,11 +896,14 @@ public class GUIController implements Initializable {
         {
             double miscIncrement = 32;
             yPos += 10;
-            playerCharLbl.setLayoutY(yPos + 1);
+            illusLbl.setLayoutY(yPos);
+            illusAvail.setLayoutY(yPos);
+            yPos += miscIncrement;
+            playerCharLbl.setLayoutY(yPos);
             playerChar.setLayoutY(yPos);
             yPos += miscIncrement;
-            illusLbl.setLayoutY(yPos + 1);
-            illusAvail.setLayoutY(yPos);
+            playerCoinLbl.setLayoutY(yPos);
+            playerCoin.setLayoutY(yPos);
             yPos += miscIncrement;
             return yPos;
         }

@@ -81,10 +81,12 @@
       <ChoiceBox fx:id="maxR" layoutX="532.0" prefWidth="75.0" />
       
       <!-- Other Multiselect Options -->
-      <Label fx:id="playerCharLbl" layoutX="350.0" prefHeight="25.0" prefWidth="105.0" text="Player Character" />
-      <ChoiceBox fx:id="playerChar" layoutX="447.0" prefWidth="300.0" />
       <Label fx:id="illusLbl" layoutX="356.0" prefHeight="25.0" prefWidth="105.0" text="Mew/Venusaur" />
       <ChoiceBox fx:id="illusAvail" layoutX="447.0" prefWidth="300.0" />
+      <Label fx:id="playerCharLbl" layoutX="350.0" prefHeight="25.0" prefWidth="105.0" text="Player Character" />
+      <ChoiceBox fx:id="playerChar" layoutX="447.0" prefWidth="300.0" />
+      <Label fx:id="playerCoinLbl" layoutX="411.0" prefHeight="25.0" prefWidth="105.0" text="Coin" />
+      <ChoiceBox fx:id="playerCoin" layoutX="447.0" prefWidth="300.0" />
       
       <!-- Seed Entry Field -->
       <Label fx:id="seedLbl" layoutX="411.0" prefHeight="25.0" prefWidth="105.0" text="Seed" />
