@@ -26,14 +26,23 @@ public class RNG {
 		
 	/** @return a random number between min and max inclusive */
 	public static byte randomRange (int min, int max) {
-		
-		if (min > max) {
-			int temp = min;
-			min = max;
-			max = temp;
-		}
-		return (byte) (min + rnd.nextInt(max - min + 1));
+		return (byte) randomInRange(min, max);
 	}
+        
+        /** @return a larger random number between min and max inclusive */
+	public static short randomRangeShort (int min, int max) {
+		return (short) randomInRange(min, max);
+	}
+        
+        /** Generates actual random number. **/
+        private static int randomInRange(int min, int max) {
+            if (min > max) {
+                int temp = min;
+                min = max;
+                max = temp;
+            }
+            return (min + rnd.nextInt(max - min + 1));
+        }
 
 	/** @return a random number multiple of delta between min and max inclusive */
 	public static byte randomRangeScale (int min, int max, int delta) {
