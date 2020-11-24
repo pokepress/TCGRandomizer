@@ -8,6 +8,7 @@ import constants.Constants;
 import constants.Fields.CardFields;
 import constants.Fields.MoveFields;
 import gui.GUIController;
+import java.io.RandomAccessFile;
 import settings.EvoTypes;
 import settings.Settings;
 import settings.Settings.Options;
@@ -257,6 +258,55 @@ class RandomizerLogic {
 		bbWrite.put((byte) 0xff); //Dedicated Promo Rarity (no icon)
                 Utils.initTo(bbWrite, i, CardFields.SET);
                 bbWrite.put((byte) 0x48); //Promo Set (used for challenge cups)
+	}
+        
+        /**Randomizes requirements for Club Masters.**/
+        static void randomizeCMReq (RandomAccessFile f) throws IOException {
+		
+                /*Isaac and Brandon's scripts check events x25, x26, x27*/
+                int isaacReq =  RNG.randomRange(0, 7);
+                
+                if (isaacReq % 2 == 1)
+                {
+                    //Remove event x25 (Jennifer) check
+                    f.seek(0xe4ae);
+                    f.writeInt(0x43434343);
+                    f.seek(0xe457);
+                    f.writeInt(0x43434343);
+                }
+                if ((isaacReq & 2) == 2)
+                {
+                    //Remove event x26 (Nicholas) check
+                    f.seek(0xe4b2);
+                    f.writeInt(0x43434343);
+                    f.seek(0xe45b);
+                    f.writeInt(0x43434343);
+                }
+                if ((isaacReq & 4) == 4)
+                {
+                    //Remove event x27 (Brandon) check
+                    f.seek(0xe4b6);
+                    f.writeInt(0x43434343);
+                    f.seek(0xe45f);
+                    f.writeInt(0x43434343);
+                }
+            
+                byte murrayBadges = (byte) RNG.randomRange(0, 7);
+		f.seek(0xeae5); //text comparison value
+                f.writeByte(murrayBadges);
+                f.seek(0xead8); //sprite position comparison value
+                f.writeByte(murrayBadges);
+                
+                if (RNG.randomRange(0, 1) == 1)
+                {
+                    /*To allow direct access to Rick, we need to move Joshua.*/
+                    f.seek(0xecc4); //Joshua's loading code
+                    f.writeLong(0x3e1b0e01cd924a00L); //set event x1b when we enter room
+                }
+                
+                short kenCards = (short) RNG.randomRangeShort(0, 500);
+                f.seek(0xef2a);
+                f.writeShort(Utils.swapAddressBytes(kenCards));
 	}
 
 }

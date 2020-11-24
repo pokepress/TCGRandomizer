@@ -15,7 +15,6 @@ import constants.Constants;
 import constants.coins.Coin;
 import constants.duelists.*;
 import gui.GUIController;
-import settings.Settings;
 import settings.Settings.Options;
 import utils.RNG;
 import utils.Utils;
@@ -64,6 +63,8 @@ public class MainLogic {
 			if (gui.getOption(Options.MATCH.ordinal())) ProgramLogic.matchAttackEnergiesToType(bbRead);		
 			ProgramLogic.doRandomization(bbRead, bbWrite);
 			ProgramLogic.saveChangesToRom(chout, bbWrite);
+                        
+                        if (gui.getOption(Options.CLUBMASTERREQ.ordinal())) RandomizerLogic.randomizeCMReq(fout);
                         
                         if (gui.getOption(Options.SPEED.ordinal())) ProgramLogic.maxTextSpeedNoAnimations(fout);
                         
