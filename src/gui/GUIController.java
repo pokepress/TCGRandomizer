@@ -54,6 +54,7 @@ public class GUIController implements Initializable {
 	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves;
 	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
         @FXML private CheckBox optionTutorial, optionBossAntiCheat, optionRebalanceTrainers;
+        @FXML private CheckBox optionClubMasterReq;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
 	@FXML private Label minHPLbl, maxHPLbl, minRCLbl, maxRCLbl;
@@ -148,9 +149,14 @@ public class GUIController implements Initializable {
                 setOption (Settings.Options.CPUANTICHEAT.ordinal());
         }
         
-        /** Updates whether the we turn off the boss NPC setup advantage. */
+        /** Updates whether the we tweak trainer card behavior. */
         private void handleRebalanceTrainersOption() {
                 setOption (Settings.Options.REBALANCETRAINERS.ordinal());
+        }
+        
+        /** Updates whether the we randomize club master requirements. */
+        private void handleClubMasterReqOption() {
+                setOption (Settings.Options.CLUBMASTERREQ.ordinal());
         }
         
         /** Returns the selected weakness/resistance randomization setting.*/
@@ -300,6 +306,11 @@ public class GUIController implements Initializable {
         @FXML
 	private void handleRebalanceTrainersClick() {	
 		setOption (Settings.Options.REBALANCETRAINERS.ordinal());
+	}
+        
+        @FXML
+	private void handleClubMasterReqClick() {	
+		setOption (Settings.Options.CLUBMASTERREQ.ordinal());
 	}
 	
 	/** Initializes all choice boxes to their default values */
@@ -820,6 +831,8 @@ public class GUIController implements Initializable {
             optionBossAntiCheat.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionRebalanceTrainers.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionClubMasterReq.setLayoutY(yPos);
             yPos += checkYIncrement;
             return yPos;
         }
