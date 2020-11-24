@@ -32,6 +32,11 @@ It also provides a number of options for tweaking game behavior:
   * Makes Super Energy Removal (changes to "Equal Energy Removal") a 1-to-1 exchange
   * Draw 5 on Professor Oak instad of 7
   * Gambler (changes to "Birch O") draws 7 (heads) or 4 (tails) cards instead of 8/1
+* Randomize requirements for battling Club Masters:
+  * Isaac (Lightning) may not require defeating Jennifer, Nicholas, and/or Brandon (50/50 each)
+  * Murray (Psychic) may require anywhere between 0 and 7 medals
+  * Rick (Science) may not require defeating Joseph (50/50 chance)
+  * Ken (Fire) may require you to have anywhere between 0 and 500 cards
 
 #### <b>Current bugs or flaws</b>
 
@@ -52,6 +57,8 @@ It also provides a number of options for tweaking game behavior:
 * Being able to load the Pokemon TCG ROM from the file system.
 * Increase chance of a Challenge Cup being triggrered on boot in postgame.
 * Additional options for player character and in-game coin.
+* Randomize requirements for Water, Fighting, and Grass Club Masters (Rock's Club Master has no requirement to begin with, making it more complicated)
+* Randomize number of medals needed to fight Grand Masters
 
 Contributions aren't expected but would always be welcome.
 
