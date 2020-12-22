@@ -66,6 +66,8 @@ public class MainLogic {
                         
                         if (gui.getOption(Options.CLUBMASTERREQ.ordinal())) RandomizerLogic.randomizeCMReq(fout);
                         
+                        if (gui.getOption(Options.MEDALREQ.ordinal())) RandomizerLogic.randomizeMedalReq(fout);
+                        
                         if (gui.getOption(Options.SPEED.ordinal())) ProgramLogic.maxTextSpeedNoAnimations(fout);
                         
                         if (gui.getOption(Options.REMOVETUTORIAL.ordinal()))

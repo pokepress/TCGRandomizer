@@ -308,5 +308,54 @@ class RandomizerLogic {
                 f.seek(0xef2a);
                 f.writeShort(Utils.swapAddressBytes(kenCards));
 	}
+        
+        /**Randomizes medal requirement for beating the game.**/
+        static void randomizeMedalReq (RandomAccessFile f) throws IOException {
+            byte medalReq =  (byte) RNG.randomRange(6, 8);
+            if(medalReq == 8)
+            {
+                return;
+            }
+            
+            //Programmatic changes
+            f.seek(0xf6b1); //Change script instruction to allow medal counts above the requirement
+            f.writeByte(0x5d);
+            f.seek(0xf6b3); //requirement for Pokemon Dome doors
+            f.writeByte(medalReq);
+            f.seek(0xf654); //count where ronald stops appearing when reading plaque
+            f.writeByte(medalReq-1);
+            
+            //Text changes
+            f.seek(0x40bef); //Science Club letter from Dr. Mason
+            f.writeBytes("the ");
+            f.writeByte(medalReq | 0x30); //Convert to character
+            f.seek(0x47392); //Plaque in Pokemon Dome
+            f.writeByte(medalReq | 0x30); //Convert to character
+            f.writeBytes(" TCG");
+            f.seek(0x473ad);
+            f.writeBytes("ir");
+            
+            f.seek(0x48dcb); //Dome Door: Fail
+            f.writeByte(medalReq | 0x30); //Convert to character
+            f.writeBytes(" / 8");
+            f.seek(0x48e0c);
+            f.writeBytes("enough ");
+            
+            f.seek(0x48e4f); //Dome Door: Proceed
+            f.writeByte(medalReq | 0x30); //Convert to character
+            f.writeBytes(" / 8");
+            f.seek(0x48e8c);
+            f.writeByte(medalReq | 0x30); //Convert to character
+            f.writeBytes(" / 8");
+            
+            f.seek(0x491fc); //Dueling stage message
+            f.writeBytes("those");
+            
+            f.seek(0x4e9fe); //Ronald's introduction
+            f.writeByte(medalReq | 0x30); //Convert to character
+            f.writeBytes(" / 8");
+            f.seek(0x4ea1c);
+            f.writeBytes("ir");
+        }
 
 }
