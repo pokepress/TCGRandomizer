@@ -54,7 +54,7 @@ public class GUIController implements Initializable {
 	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves;
 	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
         @FXML private CheckBox optionTutorial, optionBossAntiCheat, optionRebalanceTrainers;
-        @FXML private CheckBox optionClubMasterReq;
+        @FXML private CheckBox optionClubMasterReq, optionMedalReq;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
 	@FXML private Label minHPLbl, maxHPLbl, minRCLbl, maxRCLbl;
@@ -154,9 +154,15 @@ public class GUIController implements Initializable {
                 setOption (Settings.Options.REBALANCETRAINERS.ordinal());
         }
         
-        /** Updates whether the we randomize club master requirements. */
+        /** Updates whether we randomize club master requirements. */
         private void handleClubMasterReqOption() {
                 setOption (Settings.Options.CLUBMASTERREQ.ordinal());
+        }
+        
+        /** Updates whether the we randomize the number of master medals needed
+         * to beat the game. */
+        private void handleMedalReqOption() {
+                setOption (Settings.Options.MEDALREQ.ordinal());
         }
         
         /** Returns the selected weakness/resistance randomization setting.*/
@@ -311,6 +317,11 @@ public class GUIController implements Initializable {
         @FXML
 	private void handleClubMasterReqClick() {	
 		setOption (Settings.Options.CLUBMASTERREQ.ordinal());
+	}
+        
+        @FXML
+	private void handleMedalReqClick() {	
+		setOption (Settings.Options.MEDALREQ.ordinal());
 	}
 	
 	/** Initializes all choice boxes to their default values */
@@ -833,6 +844,8 @@ public class GUIController implements Initializable {
             optionRebalanceTrainers.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionClubMasterReq.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionMedalReq.setLayoutY(yPos);
             yPos += checkYIncrement;
             return yPos;
         }

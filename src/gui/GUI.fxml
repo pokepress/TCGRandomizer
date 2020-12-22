@@ -32,6 +32,7 @@
       <CheckBox fx:id="optionBossAntiCheat" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleBossAntiCheatOptionClick" text="Disable boss character setup cheating" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionRebalanceTrainers" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleRebalanceTrainersClick" text="Rebalance trainers" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionClubMasterReq" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleClubMasterReqClick" text="Randomize Club Master requirements" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionMedalReq" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleMedalReqClick" text="Randomize Medal requirement (6-8)" AnchorPane.leftAnchor="25.0"/>
       
       <!-- HP & Retreat Cost Range Controls -->
       <ChoiceBox fx:id="minHP1" layoutX="433.0" prefWidth="75.0" AnchorPane.leftAnchor="433.0"/>
