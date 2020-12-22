@@ -6,10 +6,6 @@ import java.io.RandomAccessFile;
 
 public class FireMedal extends Coin {
     
-    private final int GrassMedalAddress1 = 0x8f9a2;
-    private final int GrassMedalAddress2 = 0x8faa2;
-    private final int GrassMedalAddress3 = 0x8fba2;
-    
     public FireMedal(RandomAccessFile f) {
         super(f);
     }
