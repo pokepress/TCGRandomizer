@@ -37,6 +37,7 @@ It also provides a number of options for tweaking game behavior:
   * Murray (Psychic) may require anywhere between 0 and 7 medals
   * Rick (Science) may not require defeating Joseph (50/50 chance)
   * Ken (Fire) may require you to have anywhere between 0 and 500 cards
+* Randomize the number of Club Medals needed to fight the Grand Masters to a number between 6 and 8
 
 #### <b>Current bugs or flaws</b>
 
@@ -58,7 +59,7 @@ It also provides a number of options for tweaking game behavior:
 * Increase chance of a Challenge Cup being triggrered on boot in postgame.
 * Additional options for player character and in-game coin.
 * Randomize requirements for Water, Fighting, and Grass Club Masters (Rock's Club Master has no requirement to begin with, making it more complicated)
-* Randomize number of medals needed to fight Grand Masters
+* Customize the title screen, credits, and other elements
 
 Contributions aren't expected but would always be welcome.
 
@@ -80,6 +81,7 @@ Contributions aren't expected but would always be welcome.
 ![12](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/12.png)
 ![13](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/13.png)
 ![14](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/14.png)
+![15](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/15.png)
 
 #### <b>Download</b>
 
