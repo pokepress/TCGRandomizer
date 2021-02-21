@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
- * Japanese celebrity that did promotional work for Pokemon during the early
- * years.
+ * Pikachu fan from Lightning Club
  */
-public class Imakuni extends constants.duelists.Duelist {
+public class Jennifer extends constants.duelists.Duelist {
     
-    private final int ImakuniPortraitAddress = 0x9c242;
-    private final int ImakuniSpriteAddress = 0xa1a18;
-    private final int ImakuniBackground = 0x1481;
-    private final int ImakuniQuestionMarks = 0x9c92;
-    private final int ImakuniSuit = 0x0480;
+    private final int JenniferPortraitAddress = 0xa0fce;
+    private final int JenniferSpriteAddress = 0xa38b8;
+    private final int JenniferSkin = 0x9c33;
+    private final int JenniferBackground = 0x0811;
+    private final int JenniferCheeks = 0x1822;
+    private final int JenniferHair = 0x2204;
     
-    public Imakuni(RandomAccessFile f) {
+    public Jennifer(RandomAccessFile f) {
         super(f);
     }
     
@@ -26,15 +26,16 @@ public class Imakuni extends constants.duelists.Duelist {
     {
             //Adjust default player name
             cartFile.seek(0x128ec);
-            cartFile.writeByte(0x38); //I
+            cartFile.writeByte(0x39); //J
             cartFile.seek(0x128ee);
-            cartFile.writeByte(0x3c); //M
+            cartFile.writeByte(0x34); //E
             cartFile.seek(0x128f0);
-            cartFile.writeByte(0x30); //A
+            cartFile.writeByte(0x3d); //N
             cartFile.seek(0x128f2);
-            cartFile.writeByte(0x3a); //K
-            cartFile.writeShort(0x0344); //U
-            cartFile.writeShort(0x03bb); //?
+            cartFile.writeByte(0x3d); //N
+            cartFile.writeShort(0x0348); //Y
+            
+            femaleCharacterGameText();
     }
     
         /**Replaces the character that appears in duels, menus, etc.
@@ -43,22 +44,24 @@ public class Imakuni extends constants.duelists.Duelist {
     public void ReplaceCharacterPortrait() throws IOException
     {
             byte [] portraitData = new byte[PortaitBytes];
-            cartFile.seek(ImakuniPortraitAddress);
+            cartFile.seek(JenniferPortraitAddress);
             cartFile.read(portraitData, 0, PortaitBytes);
             cartFile.seek(PlayerPortraitStartAddress);
             cartFile.write(portraitData);
             
             //SGB Portait
-            cartFile.seek(0x7349b);
-            cartFile.writeShort(ImakuniQuestionMarks);
-            cartFile.writeShort(ImakuniBackground);
-            cartFile.writeShort(ImakuniSuit);
+            cartFile.seek(0x73499);
+            cartFile.writeShort(JenniferSkin);
+            cartFile.writeShort(JenniferCheeks);
+            cartFile.writeShort(JenniferBackground);
+            cartFile.writeShort(JenniferHair);
             
             //GBC portrait palette
-            cartFile.seek(0xb3ffa);
-            cartFile.writeShort(ImakuniQuestionMarks);
-            cartFile.writeShort(ImakuniBackground);
-            cartFile.writeShort(ImakuniSuit);
+            cartFile.seek(0xb3ff8);
+            cartFile.writeShort(JenniferSkin);
+            cartFile.writeShort(JenniferCheeks);
+            cartFile.writeShort(JenniferBackground);
+            cartFile.writeShort(JenniferHair);
     }
         /**Replaces the character that appears in overworld
      * @throws java.io.IOException.*/
@@ -66,14 +69,15 @@ public class Imakuni extends constants.duelists.Duelist {
     public void ReplaceOverworldSprite() throws IOException
     {
             byte [] spriteData = new byte[SpriteBytes];
-            cartFile.seek(ImakuniSpriteAddress);
+            cartFile.seek(JenniferSpriteAddress);
             cartFile.read(spriteData, 0, SpriteBytes);
             cartFile.seek(PlayerOverworldSpriteStartAddress);
             cartFile.write(spriteData);
             
+            //Overworld sprite color is currently shared with portait colors
+            
             //Map cursor
             cartFile.seek(0xb7b2d);
-
-            cartFile.writeShort(ImakuniQuestionMarks);
+            cartFile.writeShort(JenniferSkin);
     }
 }

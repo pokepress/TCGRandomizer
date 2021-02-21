@@ -41,6 +41,12 @@ public abstract class Duelist {
             case imakuni:
                 player = new Imakuni(f);
                 break;
+            case jennifer:
+                player = new Jennifer(f);
+                break;
+            case miyajima:
+                player = new Miyajima(f);
+                break;
             default:
                 return;
         }
@@ -51,6 +57,28 @@ public abstract class Duelist {
             player.ReplaceCharacterPortrait();
             player.ReplaceOverworldSprite();
         }
+    }
+    
+    /** Derived from "Mint" patch.
+     * Used with permission from NikcDC.
+     */
+    protected final void femaleCharacterGameText() throws IOException
+    {
+            //Game Text
+            cartFile.seek(0x4c9c7);
+            cartFile.writeBytes("er");
+            cartFile.seek(0x4cea1);
+            cartFile.writeBytes("er");
+            cartFile.seek(0x4f095);
+            cartFile.writeBytes("er");
+            cartFile.seek(0x51af4);
+            cartFile.writeBytes("You'll be the first girl I beat\non my new winning streak!");
+            cartFile.seek(0x526e3);
+            cartFile.writeBytes(". Sorry!        ");
+            cartFile.seek(0x52890);
+            cartFile.writeBytes("Boys don't take me seriously when we\nduel...  ");
+            cartFile.seek(0x529ac);
+            cartFile.writeBytes("!\nYou duel like a boy, hehe!        ");
     }
 }
 
