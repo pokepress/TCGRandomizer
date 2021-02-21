@@ -19,7 +19,7 @@ public class Jennifer extends constants.duelists.Duelist {
         super(f);
     }
     
-        /**Alters text for default name, pronouns, etc
+    /**Alters text for default name, pronouns, etc
      * @throws java.io.IOException*/
     @Override
     public void AdjustGameText() throws IOException
@@ -38,8 +38,8 @@ public class Jennifer extends constants.duelists.Duelist {
             femaleCharacterGameText();
     }
     
-        /**Replaces the character that appears in duels, menus, etc.
-     * @throws java.io.IOException.*/
+    /**Replaces the character that appears in duels, menus, etc.
+     * @throws java.io.IOException*/
     @Override
     public void ReplaceCharacterPortrait() throws IOException
     {
@@ -63,8 +63,8 @@ public class Jennifer extends constants.duelists.Duelist {
             cartFile.writeShort(JenniferBackground);
             cartFile.writeShort(JenniferHair);
     }
-        /**Replaces the character that appears in overworld
-     * @throws java.io.IOException.*/
+    /**Replaces the character that appears in overworld
+     * @throws java.io.IOException*/
     @Override
     public void ReplaceOverworldSprite() throws IOException
     {

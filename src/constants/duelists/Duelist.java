@@ -20,15 +20,21 @@ public abstract class Duelist {
         cartFile = f;
     }
     
-    /**Alters text for default name, pronouns, etc.*/
+    /**Alters text for default name, pronouns, etc
+     * @throws java.io.IOException*/
     public abstract void AdjustGameText() throws IOException;
-    /**Replaces the character that appears in duels, menus, etc.*/
+    /**Replaces the character that appears in duels, menus, etc
+     * @throws java.io.IOException*/
     public abstract void ReplaceCharacterPortrait() throws IOException;
-    /**Replaces the character that appears in overworld*/
+    /**Replaces the character that appears in overworld
+     * @throws java.io.IOException*/
     public abstract void ReplaceOverworldSprite() throws IOException;
 
-    /** Given a character and an output file, performs customizations.*/
-    public static void customizeCharacter(settings.Settings.playerCharacter character, RandomAccessFile f ) throws IOException
+    /** Given a character and an output file, performs customizations
+     * @param character character being used by player
+     * @param cartFile output ROM file
+     * @throws java.io.IOException*/
+    public static void customizeCharacter(settings.Settings.playerCharacter character, RandomAccessFile cartFile ) throws IOException
     {
         Duelist player;
         switch(character)
@@ -36,16 +42,16 @@ public abstract class Duelist {
             case defaultMark:
                 return;
             case mint:
-                player = new Mint(f);
+                player = new Mint(cartFile);
                 break;
             case imakuni:
-                player = new Imakuni(f);
+                player = new Imakuni(cartFile);
                 break;
             case jennifer:
-                player = new Jennifer(f);
+                player = new Jennifer(cartFile);
                 break;
             case miyajima:
-                player = new Miyajima(f);
+                player = new Miyajima(cartFile);
                 break;
             default:
                 return;
@@ -59,8 +65,8 @@ public abstract class Duelist {
         }
     }
     
-    /** Derived from "Mint" patch.
-     * Used with permission from NikcDC.
+    /** Derived from "Mint" patch.Used with permission from NikcDC.
+     * @throws java.io.IOException
      */
     protected final void femaleCharacterGameText() throws IOException
     {

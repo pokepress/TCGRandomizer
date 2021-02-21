@@ -19,7 +19,7 @@ public class Imakuni extends constants.duelists.Duelist {
         super(f);
     }
     
-        /**Alters text for default name, pronouns, etc
+    /**Alters text for default name, pronouns, etc
      * @throws java.io.IOException*/
     @Override
     public void AdjustGameText() throws IOException
@@ -37,8 +37,8 @@ public class Imakuni extends constants.duelists.Duelist {
             cartFile.writeShort(0x03bb); //?
     }
     
-        /**Replaces the character that appears in duels, menus, etc.
-     * @throws java.io.IOException.*/
+    /**Replaces the character that appears in duels, menus, etc.
+     * @throws java.io.IOException*/
     @Override
     public void ReplaceCharacterPortrait() throws IOException
     {
@@ -60,8 +60,8 @@ public class Imakuni extends constants.duelists.Duelist {
             cartFile.writeShort(ImakuniBackground);
             cartFile.writeShort(ImakuniSuit);
     }
-        /**Replaces the character that appears in overworld
-     * @throws java.io.IOException.*/
+    /**Replaces the character that appears in overworld
+     * @throws java.io.IOException*/
     @Override
     public void ReplaceOverworldSprite() throws IOException
     {
