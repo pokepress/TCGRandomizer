@@ -20,10 +20,10 @@ public class Settings {
         /** List of possible player characters. */
         public enum playerCharacter {
             defaultMark,               //default character
-            mint,                      //female character from gb2
+            mint,                      //female character from Card GB 2
             imakuni,                   //Japanese celebrity
             jennifer,                  //Pikachu fan
-            miyajima                      //Opponent from gb2
+            miyajima                   //Opponent from Card GB 2
             //In theory, any character with a portrait and overworld sprite could be swapped.
         }
         
