@@ -39,6 +39,8 @@ public class GUIController implements Initializable {
         private static final String PlayerDefaultMark = "Default (Mark)";
         private static final String PlayerMint = "Mint (Card GB 2)";
         private static final String PlayerImakuni = "Imakuni?";
+        private static final String PlayerJennifer = "Jennifer (Pikachu Fan)";
+        private static final String PlayerMiyajima = "Miyajima (Jacob) (Card GB 2)";
         
         private static final String CoinDefaultPikachu = "Default (Pikachu)";
         private static final String CoinGrassMedal = "Grass Medal";
@@ -338,6 +340,8 @@ public class GUIController implements Initializable {
                 PlayerCharList.add(PlayerDefaultMark);
                 PlayerCharList.add(PlayerMint);
                 PlayerCharList.add(PlayerImakuni);
+                PlayerCharList.add(PlayerJennifer);
+                PlayerCharList.add(PlayerMiyajima);
                 
                 PlayerCoinList.add(CoinDefaultPikachu);
                 PlayerCoinList.add(CoinGrassMedal);
@@ -439,6 +443,12 @@ public class GUIController implements Initializable {
                         break;
                     case imakuni:
                         playerChar.setValue(PlayerImakuni);
+                        break;
+                    case jennifer:
+                        playerChar.setValue(PlayerJennifer);
+                        break;
+                    case miyajima:
+                        playerChar.setValue(PlayerMiyajima);
                         break;
                     default:
                         playerChar.setValue(PlayerDefaultMark);
@@ -751,6 +761,14 @@ public class GUIController implements Initializable {
                                 else if (newValue.equals(PlayerImakuni))
                                 {
                                     Settings.settings.setPlayerChar(Settings.playerCharacter.imakuni);
+                                }
+                                else if (newValue.equals(PlayerJennifer))
+                                {
+                                    Settings.settings.setPlayerChar(Settings.playerCharacter.jennifer);
+                                }
+                                else if (newValue.equals(PlayerMiyajima))
+                                {
+                                    Settings.settings.setPlayerChar(Settings.playerCharacter.miyajima);
                                 }
 			}
 		});
