@@ -114,10 +114,12 @@ public class MainLogic {
 			Utils.print(outputFileName + " has been successfully generated. Took "+ (double) (endTime - startTime)/1000000 + " ms.");
 			
 		} catch (FileNotFoundException e) {
-			Utils.print(Constants.FILE_NAME_IN + " was not found in the directory "
-					+ "or is not a valid Pokemon TCG ROM.\n"
-					+ "Required ROM:\n"
-					+ "Pok\u00e9mon Trading Card Game (U) [C][!].gbc md5: 219b2cc64e5a052003015d4bd4c622cd\n");
+			Utils.print("One or more needed files are missing.\n\n"
+                                        + Constants.FILE_NAME_IN + " should be in the same directory as the jar file "
+					+ "and a valid Pokemon TCG ROM.\n"
+					+ "Required ROM: "
+					+ "Pok\u00e9mon Trading Card Game (U) [C][!].gbc md5: 219b2cc64e5a052003015d4bd4c622cd");
+                                                
 			
 		} catch (IOException e) {
 			Utils.print("An unexpected error has occurred. Try again maybe?");

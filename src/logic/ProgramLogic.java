@@ -34,10 +34,7 @@ class ProgramLogic {
 		ByteBuffer headerin = ByteBuffer.allocate(header.length);
 		chin.read(headerin, 0x134);
 		
-		if (((ByteBuffer) headerin.rewind()).compareTo(ByteBuffer.wrap(header)) == 0)
-			return true;
-		else
-			return false;
+            return ((ByteBuffer) headerin.rewind()).compareTo(ByteBuffer.wrap(header)) == 0;
 	}
 	
 	/** Creates a copy of tcg.gbc named tcgrandomized.gbc */
