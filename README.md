@@ -23,7 +23,7 @@ If randomizing weakness and resistance, there are currently four options:
 It also provides a number of options for tweaking game behavior:
 * Default the text speed to the fastest setting and disable attack animations when starting a new file
 * Skip the tutorial battle entirely (based on Sanqui's solution-used with permission)
-* Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission), or Imakuni?
+* Play as Mint from the Japan-only sequel (based on NikcDC's patch-used with permission), Imakuni?, and more!
 * Choose a different set of graphics for the in-game coin
 * Insert the illusion cards (normally only available via Card Pop!) randomly into in-game sets, or treat them as promos (available via the Challenge Cup after the two built-in Challenges)
 * Prevent boss characters (Club Masters, Grand Masters, and Ronald) from manipulating their opening hand at the start of a battle
