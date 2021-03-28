@@ -38,13 +38,14 @@ It also provides a number of options for tweaking game behavior:
   * Rick (Science) may not require defeating Joseph (50/50 chance)
   * Ken (Fire) may require you to have anywhere between 0 and 500 cards
 * Randomize the number of Club Medals needed to fight the Grand Masters to a number between 6 and 8
+* Change "Call for Family" attacks to search for a same-typed basic instead of a specific Pokemon
+* Rebalance attack costs (currently changes all "Call for Family" attacks to require a single energy matching the Pokemon's type)
 
 #### <b>Current bugs or flaws</b>
 
 * (Bug) If the shuffle moves option is selected, most Pokemon names in the move descriptions will be wrong as they will still refer to the original card.
 * (Flaw) If the shuffle moves option is selected, there is a chance that a card ends up with no damage-dealing move (more common for cards with a single move slot).
 * (Flaw) If the shuffle moves option is selected, a Pokemon may wind up with a boosting move that references an attack it doesn't have.
-* (Flaw) If the shuffle moves option is selected, Call for Family and similar effects are inconsistent with the card Pokemon species.
 * (Flaw) I haven't been able to find where the palette used for the in-game coin is yet, so alternate coins still have the same color scheme.
 
 #### <b>Planned features or tweaks (in no particular order)</b>
@@ -82,6 +83,7 @@ Contributions aren't expected but would always be welcome.
 ![13](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/13.png)
 ![14](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/14.png)
 ![15](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/15.png)
+![16](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/16.png)
 
 #### <b>Download</b>
 
