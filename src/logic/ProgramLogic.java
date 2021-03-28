@@ -8,7 +8,9 @@ import java.nio.channels.FileChannel;
 import static constants.Cards.*;
 import constants.Cards;
 import constants.Constants;
+import constants.Fields;
 import constants.Fields.CardFields;
+import constants.Fields.MoveFields;
 import constants.WRGroups;
 import gui.GUIController;
 import settings.EvoTypes;
@@ -21,6 +23,7 @@ class ProgramLogic {
 		
 	private static final GUIController gui = GUIController.getGuiController();
         private static final int bytesToAddFlip = 11; //Number of bytes needed to add a coin flip to an effect
+        private static final int effectFreeSpaceStart = 0x2ff03;
 
 	ProgramLogic() {}
 	
@@ -76,6 +79,20 @@ class ProgramLogic {
 		Utils.initTo(bb, Cards.SurfingPikachu2.ordinal(), CardFields.MOVE1);
 		bb.put(light_2); /* Surfing Pikachu 2's Surf */
 	}
+        
+        static void rebalanceAttackCosts (ByteBuffer bb) throws IOException {
+            byte[] fight_1 = {0x00, 0x00, 0x10, 0x00};
+            byte[] grass_1 = {0x01, 0x00, 0x00, 0x00};
+            
+            Utils.initTo(bb, Cards.Marowak1.ordinal(), CardFields.MOVE2);
+            bb.put(fight_1); /* Marowak 1's Call for Friend */
+            
+            Utils.initTo(bb, Cards.NidoranF.ordinal(), CardFields.MOVE2);
+            bb.put(grass_1); /* Nidoran Female's Call for Family */
+            
+            Utils.initTo(bb, Cards.Oddish.ordinal(), CardFields.MOVE2);
+            bb.put(grass_1); /* Oddish's Sprout */
+        }
 	
 	/** Applies the randomization in the second byte buffer */
 	static void doRandomization (ByteBuffer bbRead, ByteBuffer bbWrite) throws IOException {
@@ -361,6 +378,138 @@ class ProgramLogic {
             f.writeByte(0x05);
             f.seek(0x2f3bd);
             f.writeByte(0x05);
+        }
+        
+        /** Generifies call for family moves by making them work like
+         Marowak's "Call For Friend" by looking for a card with a type 
+         matching the attacking Pokemon.*/
+        static void fixCallForFamily(RandomAccessFile f, ByteBuffer bb) throws IOException
+        {
+            //Use the search parameter to specify type for basic search
+            f.seek(0x2c35a);
+            f.writeByte(0xbb);
+            f.writeByte(0x00);
+            
+            //Copy code from Marowak
+            f.seek(0x2e110);
+            byte[] callBytes = new byte[132];
+            f.read(callBytes, 0 , 132);
+            
+            //Change Krabby
+            
+            //Change type to water, text pointers
+            callBytes[8] = 0x22;
+            callBytes[11] = 0x28;
+            callBytes[14] = 0x03;
+            callBytes[24] = 0x28;
+            callBytes[44] = 0x03;
+            callBytes[82] = 0x03;
+            callBytes[122] = 0x03;
+            f.seek(0x2cf6d); //start of player action code
+            f.write(callBytes);
+            
+            //Adjust command ponters
+            f.seek(0x188c4); //After selection
+            f.writeShort(0x9461);
+            f.seek(0x188ca); //AI commands
+            f.writeByte(0xd4);
+            
+            //Adjust text (limited space compared to grass)
+            f.seek(0x388ee);
+            f.writeByte(0x06);
+            f.writeBytes("Basic water Pk ");
+            
+            f.seek(0x38a02);
+            f.writeByte(0x06);
+            f.writeBytes("Choose a Basic.");
+            f.writeByte(0x00);//terminate string
+            
+            f.seek(0x5bd89);
+            f.writeShort(0x0504); // water symbol
+            f.writeByte(0x0a);
+            f.writeBytes("Pok`mon and put it onto your Bench.");
+            f.writeByte(0x0a);
+            f.writeBytes("Shuffle your deck afterward. (You");
+            f.writeByte(0x0a);
+            f.writeBytes("can't use this attack if your Bench");
+            f.writeByte(0x0a);
+            f.writeBytes("is full.)");
+            f.writeByte(0x00);//terminate string
+            
+            //Change Marowak
+            f.seek(0x2e11e);
+            f.writeByte(0x04); //Pass Fighting as parameter
+            
+            //Change Grass Pokemon (Could be more efficient in terms of space)
+            
+            byte[] nidoranCffDesc = {0x4e, 0x08};
+            
+            //Change type to grass, text pointers
+            callBytes[8] = 0x2a;
+            callBytes[11] = 0x28;
+            callBytes[14] = 0x01;
+            callBytes[24] = 0x28;
+            callBytes[44] = 0x01;
+            callBytes[82] = 0x01;
+            callBytes[122] = 0x01;
+            
+            //Oddish
+            f.seek(0x2c85a); //start of player action code
+            f.write(callBytes);
+            
+            //Adjust command ponters
+            f.seek(0x1878e); //After selection
+            f.writeShort(0x9461);
+            f.seek(0x18794); //AI commands
+            f.writeByte(0xc1);
+            
+            //Point to shared attack description
+            Utils.initTo(bb, Cards.Oddish.ordinal(), MoveFields.DESCRIPTION, 1);
+            bb.put(nidoranCffDesc);
+            
+            //Bellsprout
+            f.seek(0x2cc50); //start of player action code
+            f.write(callBytes);
+            
+            //Adjust command ponters
+            f.seek(0x18839); //After selection
+            f.writeShort(0x9461);
+            f.seek(0x1883f); //AI commands
+            f.writeByte(0xb7);
+            
+            //Point to shared attack description
+            Utils.initTo(bb, Cards.Bellsprout.ordinal(), MoveFields.DESCRIPTION, 1);
+            bb.put(nidoranCffDesc);
+            
+            //Nidoran (f)
+            f.seek(0x2c9eb); //start of player action code
+            f.write(callBytes);
+            
+            //Adjust command ponters
+            f.seek(0x187cb); //After selection
+            f.writeShort(0x9461);
+            f.seek(0x187d1); //AI commands
+            f.writeByte(0x52);
+            
+            //Alter the Nidoran action text and use that
+            f.seek(0x38a3b);
+            f.writeBytes("basic");
+            f.writeByte(0x0a);
+            f.writeBytes("grass Pok`mon.");
+            f.writeByte(0x00);//terminate string
+            
+            //Alter attack description
+            f.seek(0x58370);
+            f.writeShort(0x0502); // grass symbol
+            f.writeByte(0x0a);
+            f.writeBytes("Pok`mon and put it onto your Bench.");
+            f.writeByte(0x0a);
+            f.writeBytes("Shuffle your deck afterward. (You");
+            f.writeByte(0x0a);
+            f.writeBytes("can't use this attack if your Bench");
+            f.writeByte(0x0a);
+            f.writeBytes("is full.)");
+            f.writeByte(0x00);//terminate string
         }
 	
 	/** Fixes the global checksum */

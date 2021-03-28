@@ -60,8 +60,11 @@ public class MainLogic {
 			ProgramLogic.createRomCopy(chin, chout);
                         
 			ProgramLogic.readPokemonCardsData(chin, bbRead, bbWrite);
-			if (gui.getOption(Options.MATCH.ordinal())) ProgramLogic.matchAttackEnergiesToType(bbRead);		
+			if (gui.getOption(Options.MATCH.ordinal())) ProgramLogic.matchAttackEnergiesToType(bbRead);
+                        if (gui.getOption(Options.REBALANCEATTCOST.ordinal())) ProgramLogic.rebalanceAttackCosts(bbRead);
+                        if (gui.getOption(Options.FIXCFF.ordinal())) ProgramLogic.fixCallForFamily(fout,bbRead);
 			ProgramLogic.doRandomization(bbRead, bbWrite);
+                        
 			ProgramLogic.saveChangesToRom(chout, bbWrite);
                         
                         if (gui.getOption(Options.CLUBMASTERREQ.ordinal())) RandomizerLogic.randomizeCMReq(fout);
