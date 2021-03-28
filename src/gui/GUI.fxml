@@ -25,12 +25,14 @@
       <CheckBox fx:id="optionRC" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleRCOptionClick" selected="true" text="Randomize retreat cost" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionWR" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleWROptionClick" selected="true" text="Randomize weakness &amp; resistance" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionMoves" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleMovesOptionClick" selected="true" text="Shuffle moves" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionFixCallForFamily" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleFixCallForFamilyOptionClick" selected="true" text="Call for Family searches for typed basic" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionFillEmpty" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleFillEmptyOptionClick" selected="false" text="Fill empty moveslots" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionMatchEnergies" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleMatchEnergiesOptionClick" selected="false" text="Match energies to type" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionSpeed" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleSpeedOptionClick" selected="true" text="Maximize text speed and disable attack animations" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionTutorial" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleTutorialOptionClick" selected="true" text="Remove tutorial" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionBossAntiCheat" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleBossAntiCheatOptionClick" text="Disable boss character setup cheating" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionRebalanceTrainers" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleRebalanceTrainersClick" text="Rebalance trainers" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionRebalanceAttackCosts" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleRebalanceAttackCostsClick" text="Rebalance attack costs" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionClubMasterReq" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleClubMasterReqClick" text="Randomize Club Master requirements" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionMedalReq" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleMedalReqClick" text="Randomize Medal requirement (6-8)" AnchorPane.leftAnchor="25.0"/>
       

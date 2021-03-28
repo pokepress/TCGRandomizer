@@ -53,9 +53,9 @@ public class GUIController implements Initializable {
         
 	/* Options to randomize HP, weaknesses/resistances, retreat cost, 
            shuffle moves, default gsme speed, and skip tutorial */
-	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves;
+	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves, optionFixCallForFamily;
 	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
-        @FXML private CheckBox optionTutorial, optionBossAntiCheat, optionRebalanceTrainers;
+        @FXML private CheckBox optionTutorial, optionBossAntiCheat, optionRebalanceTrainers, optionRebalanceAttackCosts;
         @FXML private CheckBox optionClubMasterReq, optionMedalReq;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
@@ -111,6 +111,7 @@ public class GUIController implements Initializable {
 		handleWROption();
 		handleRCOption();
 		handleMovesOption();
+                handleCFFOption();
                 handleSpeedOption();
                 handleTutorialOption();
 	}
@@ -134,6 +135,11 @@ public class GUIController implements Initializable {
 	private void handleMovesOption() {
 		setOption (Settings.Options.MOVES.ordinal());
 	}
+        
+        /** Updates whether "Call For Family" attacks are changed. */
+	private void handleCFFOption() {
+		setOption (Settings.Options.FIXCFF.ordinal());
+	}
 
         /** Updates whether text speed is maximized and animation are disabled.*/
         private void handleSpeedOption() {
@@ -153,6 +159,11 @@ public class GUIController implements Initializable {
         
         /** Updates whether the we tweak trainer card behavior. */
         private void handleRebalanceTrainersOption() {
+                setOption (Settings.Options.REBALANCETRAINERS.ordinal());
+        }
+        
+        /** Updates whether the we tweak attack costs. */
+        private void handleRebalanceAttackCostsOption() {
                 setOption (Settings.Options.REBALANCETRAINERS.ordinal());
         }
         
@@ -285,6 +296,11 @@ public class GUIController implements Initializable {
 		optionFillEmpty.setDisable(optionFillEmpty.isDisable()^true);
 		optionMatchEnergies.setDisable(optionMatchEnergies.isDisable()^true);
 	}
+        
+        @FXML
+	private void handleFixCallForFamilyOptionClick() {	
+		setOption (Settings.Options.FIXCFF.ordinal());
+	}
 	
 	@FXML
 	private void handleFillEmptyOptionClick() {	
@@ -314,6 +330,11 @@ public class GUIController implements Initializable {
         @FXML
 	private void handleRebalanceTrainersClick() {	
 		setOption (Settings.Options.REBALANCETRAINERS.ordinal());
+	}
+        
+        @FXML
+	private void handleRebalanceAttackCostsClick() {	
+		setOption (Settings.Options.REBALANCEATTCOST.ordinal());
 	}
         
         @FXML
@@ -849,6 +870,8 @@ public class GUIController implements Initializable {
             yPos += checkYIncrement;
             optionMoves.setLayoutY(yPos);
             yPos += checkYIncrement;
+            optionFixCallForFamily.setLayoutY(yPos);
+            yPos += checkYIncrement;
             optionFillEmpty.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionMatchEnergies.setLayoutY(yPos);
@@ -860,6 +883,8 @@ public class GUIController implements Initializable {
             optionBossAntiCheat.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionRebalanceTrainers.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionRebalanceAttackCosts.setLayoutY(yPos);
             yPos += checkYIncrement;
             optionClubMasterReq.setLayoutY(yPos);
             yPos += checkYIncrement;
