@@ -46,11 +46,9 @@ It also provides a number of options for tweaking game behavior:
 * (Bug) If the shuffle moves option is selected, most Pokemon names in the move descriptions will be wrong as they will still refer to the original card.
 * (Flaw) If the shuffle moves option is selected, there is a chance that a card ends up with no damage-dealing move (more common for cards with a single move slot).
 * (Flaw) If the shuffle moves option is selected, a Pokemon may wind up with a boosting move that references an attack it doesn't have.
-* (Flaw) I haven't been able to find where the palette used for the in-game coin is yet, so alternate coins still have the same color scheme.
 
 #### <b>Planned features or tweaks (in no particular order)</b>
 
-* Fix wrong Pokemon names showing in the descriptions of the shuffled moves.
 * Selectable "energy mappings" in the shuffle moves option.
 * Option to force a damaing move on every card.
 * Further randomization of moves, beyond just shuffling the effects, and randomizing energy requirements and damage. Randomizing the move effects themselves may be a possibility, but further reverse engineering of the Pokemon TCG duel engine will be necessary first.
@@ -84,6 +82,7 @@ Contributions aren't expected but would always be welcome.
 ![14](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/14.png)
 ![15](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/15.png)
 ![16](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/16.png)
+![17](https://raw.githubusercontent.com/pokepress/TCGRandomizer/master/screenshots/17.png)
 
 #### <b>Download</b>
 
