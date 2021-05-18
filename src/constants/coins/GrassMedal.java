@@ -5,6 +5,8 @@ import java.io.RandomAccessFile;
 
 public class GrassMedal extends Coin {
     
+    private final int GrassMedalColorsAddress = 0xb82d5;
+    
     public GrassMedal(RandomAccessFile f) {
         super(f);
     }
@@ -84,5 +86,16 @@ public class GrassMedal extends Coin {
     public void AlterCoinSideView() throws IOException
     {
         
+    }
+    
+    /**Alters palette for coin*/
+    public void AlterCoinPalette() throws IOException
+    {
+        //copy colors from grass medal
+        cartFile.seek(GrassMedalColorsAddress);
+        byte[] colors = new byte[8];
+        cartFile.read(colors, 0 , 8);
+        cartFile.seek(CoinPaletteColorsAddress);
+        cartFile.write(colors);
     }
 }

@@ -6,6 +6,8 @@ import java.io.RandomAccessFile;
 
 public class FireMedal extends Coin {
     
+    private final int FireMedalColorsAddress = 0xb82dd;
+    
     public FireMedal(RandomAccessFile f) {
         super(f);
     }
@@ -85,5 +87,16 @@ public class FireMedal extends Coin {
     public void AlterCoinSideView() throws IOException
     {
         
+    }
+    
+    /**Alters palette for coin*/
+    public void AlterCoinPalette() throws IOException
+    {
+        //copy colors from fire medal
+        cartFile.seek(FireMedalColorsAddress);
+        byte[] colors = new byte[8];
+        cartFile.read(colors, 0 , 8);
+        cartFile.seek(CoinPaletteColorsAddress);
+        cartFile.write(colors);
     }
 }

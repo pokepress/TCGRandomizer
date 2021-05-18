@@ -12,7 +12,8 @@ public abstract class Coin {
     protected final int FlippingAStartAddress = 0xa82ca;
     protected final int FlippingBStartAddress = 0xa830a;
     protected final int SideStartAddress = 0xa834a;
-    //Coin palette may be tied to other UI elements, or somewhere in the bxxxx range
+    protected final int CoinPaletteAddress = 0xb7e21;
+    protected final int CoinPaletteColorsAddress = CoinPaletteAddress + 0x3;
     
     protected final int HeadsTiles = 9;
     protected final int TailsAndFlipTiles = 4;
@@ -34,6 +35,8 @@ public abstract class Coin {
     public abstract void AlterCoinFlippingB() throws IOException;
     /**Alters graphics for side view of coin*/
     public abstract void AlterCoinSideView() throws IOException;
+    /**Alters palette for coin*/
+    public abstract void AlterCoinPalette() throws IOException;
     
     /** Given a coin and an output file, performs customizations.*/
     public static void customizeCoin(settings.Settings.coin coin, RandomAccessFile f ) throws IOException
@@ -52,6 +55,12 @@ public abstract class Coin {
             case waterMedal:
                 playerCoin = new WaterMedal(f);
                 break;
+            case chansey:
+                playerCoin = new ChanseyCoin(f);
+                break;
+            case psyduck:
+                playerCoin = new PsyduckCoin(f);
+                break;
             default:
                 return;
         }
@@ -63,6 +72,7 @@ public abstract class Coin {
             playerCoin.AlterCoinFlippingA();
             playerCoin.AlterCoinFlippingB();
             playerCoin.AlterCoinSideView();
+            playerCoin.AlterCoinPalette();
         }
     }
 }

@@ -5,6 +5,8 @@ import java.io.RandomAccessFile;
 
 public class WaterMedal extends Coin{
     
+    private final int WaterMedalColorsAddress = 0xb82e5;
+    
     public WaterMedal(RandomAccessFile f)
     {
         super(f);
@@ -85,4 +87,16 @@ public class WaterMedal extends Coin{
     {
         
     }
+    
+    /**Alters palette for coin*/
+    public void AlterCoinPalette() throws IOException
+    {
+        //copy colors from water medal
+        cartFile.seek(WaterMedalColorsAddress);
+        byte[] colors = new byte[8];
+        cartFile.read(colors, 0 , 8);
+        cartFile.seek(CoinPaletteColorsAddress);
+        cartFile.write(colors);
+    }
+        
 }
