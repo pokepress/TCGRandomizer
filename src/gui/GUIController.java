@@ -46,6 +46,8 @@ public class GUIController implements Initializable {
         private static final String CoinGrassMedal = "Grass Medal";
         private static final String CoinFireMedal = "Fire Medal";
         private static final String CoinWaterMedal = "Water Medal";
+        private static final String CoinChansey = "Chansey";
+        private static final String CoinPsyduck = "Psyduck";
         
         private static final String CardPopOnly = "Default (Card Pop! Only)";
         private static final String AddToSets = "Add randomly to in-game sets";
@@ -368,6 +370,8 @@ public class GUIController implements Initializable {
                 PlayerCoinList.add(CoinGrassMedal);
                 PlayerCoinList.add(CoinFireMedal);
                 PlayerCoinList.add(CoinWaterMedal);
+                PlayerCoinList.add(CoinChansey);
+                PlayerCoinList.add(CoinPsyduck);
                 
                 IllusAvailList.add(CardPopOnly);
                 IllusAvailList.add(AddToSets);
@@ -490,6 +494,12 @@ public class GUIController implements Initializable {
                         break;
                     case waterMedal:
                         playerCoin.setValue(CoinWaterMedal);
+                        break;
+                    case chansey:
+                        playerCoin.setValue(CoinChansey);
+                        break;
+                    case psyduck:
+                        playerCoin.setValue(CoinPsyduck);
                         break;
                     default:
                         playerCoin.setValue(CoinDefaultPikachu);
@@ -813,6 +823,14 @@ public class GUIController implements Initializable {
                                 else if (newValue.equals(CoinWaterMedal))
                                 {
                                     Settings.settings.setCoin(Settings.coin.waterMedal);
+                                }
+                                else if (newValue.equals(CoinChansey))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.chansey);
+                                }
+                                else if (newValue.equals(CoinPsyduck))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.psyduck);
                                 }
 			}
 		});
