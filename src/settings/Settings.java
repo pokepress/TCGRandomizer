@@ -33,6 +33,8 @@ public class Settings {
             grassMedal,
             fireMedal,
             waterMedal,
+            chansey,
+            psyduck
         }
         
         /** Controls availability of Mew and Venusaur, normally only available 
