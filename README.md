@@ -40,6 +40,7 @@ It also provides a number of options for tweaking game behavior:
 * Randomize the number of Club Medals needed to fight the Grand Masters to a number between 6 and 8
 * Change "Call for Family" attacks to search for a same-typed basic instead of a specific Pokemon
 * Rebalance attack costs (currently changes all "Call for Family" attacks to require a single energy matching the Pokemon's type)
+* Randomize the heads/tails probability between 33% and 67% (affects both players)
 
 #### <b>Current bugs or flaws</b>
 
@@ -55,7 +56,7 @@ It also provides a number of options for tweaking game behavior:
 * Randomization of types. This is related to the randomization of energy requirements and would require adjusting the decks to keep them type-consistent. 
 * Randomization of other misc Pokemon card data.
 * Being able to load the Pokemon TCG ROM from the file system.
-* Increase chance of a Challenge Cup being triggrered on boot in postgame.
+* Increase the chance of a Challenge Cup being triggrered on boot in postgame.
 * Additional options for player character and in-game coin.
 * Randomize requirements for Water, Fighting, and Grass Club Masters (Rock's Club Master has no requirement to begin with, making it more complicated)
 * Customize the title screen, credits, and other elements
