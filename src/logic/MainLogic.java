@@ -42,7 +42,7 @@ public class MainLogic {
                     Utils.print("No valid seed value was entered. " + seed + " will be used.");
                 }
                 
-                String outputFileName = utils.Utils.generateOutputFilename(seed, gui.getConfigString());
+                String outputFileName = utils.Utils.generateOutputFilename(seed, gui.getConfigString(false));
 				
 		ByteBuffer bbRead = ByteBuffer.allocate(Constants.PKMN_CARD_DATA_LENGTH * Constants.NUM_POKEMON_CARDS);
 		ByteBuffer bbWrite = ByteBuffer.allocate(Constants.PKMN_CARD_DATA_LENGTH * Constants.NUM_POKEMON_CARDS);
@@ -92,6 +92,11 @@ public class MainLogic {
                             ProgramLogic.addIllusionToCup(fout);
                         }
                         
+                        if (gui.getOption(Options.FLIPPROB.ordinal()))
+                        {
+                            ProgramLogic.randomizeFlipProbability(fout);
+                        }
+                        
                         if (gui.getOption(Options.REBALANCETRAINERS.ordinal()))
                         {
                             eventCodeFreeSpacePointer = ProgramLogic.nerfEnergyRemoval(fout, eventCodeFreeSpacePointer);
@@ -109,6 +114,11 @@ public class MainLogic {
                         if(gui.getCoin() != settings.Settings.coin.defaultPikachu)
                         {
                             Coin.customizeCoin(gui.getCoin(), fout);
+                        }
+                        
+                        if(gui.getOption(Options.SHOWSEEDCONFIG.ordinal()))
+                        {
+                            ProgramLogic.addConfigToIntro(fout);
                         }
                         
 			ProgramLogic.fixGlobalChecksum(chout);

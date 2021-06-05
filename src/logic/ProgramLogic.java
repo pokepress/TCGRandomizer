@@ -511,6 +511,51 @@ class ProgramLogic {
             f.writeBytes("is full.)");
             f.writeByte(0x00);//terminate string
         }
+        
+        /**Changes coin flip logic to support a randomized probability. Affects
+         both players. Ranges from 33% heads to 67% heads.*/
+        static void randomizeFlipProbability(RandomAccessFile f) throws IOException
+        {
+            //Assumes: Register E has a value of 0
+            f.seek(0x7246);
+            //Add a number to register A instead of performing bitwise rotation
+            f.writeByte(0xc6); 
+            //The larger the number, the more likely the value is to carry,
+            //so larger numbers reduce the heads probability
+            f.writeByte(utils.RNG.randomRange(85, 171));
+            
+            //reposition subsequent operations
+            f.writeShort(0x3803); //Jump 3 opcodes if carry flag is set (results in tails)
+            f.writeShort(0x1659); //Copy x59 to register D (animation number)
+            f.writeByte(0x1c); //Increment register E to 1 (results in heads)
+        }
+        
+        /** Replaces the first part of the intro text with seed and config info.
+         I would have preferred to display this values during the title screen
+         animation or new game menu, but this was logistically easier and still
+         appears before the player sees any cards.*/
+        static void addConfigToIntro(RandomAccessFile f) throws IOException
+        {
+            //Including the minus sign, a 64-bit long should max out at 20 digits
+            f.seek(0x3efc4);
+            f.writeBytes("S: " + String.format("%1$-21s", gui.getSeed()));
+            f.seek(0x3efdd);
+            String config=gui.getConfigString(true);
+            /*We're curruntly limited by the number of characters used for each 
+            line of the intro, so showing the full configuration may not be
+            possible in the future without significant rework.*/
+            if (config.length() > 27)
+            {
+                config = config.substring(0, 24) + "...";
+            }
+            else if(config.length() < 27)
+            {
+                config = String.format("%1$-27s", config);
+            }
+            f.writeBytes("C: " + config );
+            f.writeByte(0x0a);
+            f.writeBytes("1");
+        }
 	
 	/** Fixes the global checksum */
 	static void fixGlobalChecksum (FileChannel ch) throws IOException {
