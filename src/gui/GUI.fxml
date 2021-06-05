@@ -35,6 +35,8 @@
       <CheckBox fx:id="optionRebalanceAttackCosts" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleRebalanceAttackCostsClick" text="Rebalance attack costs" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionClubMasterReq" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleClubMasterReqClick" text="Randomize Club Master requirements" AnchorPane.leftAnchor="25.0"/>
       <CheckBox fx:id="optionMedalReq" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleMedalReqClick" text="Randomize Medal requirement (6-8)" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionFlipProb" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleFlipProbClick" text="Randomize heads/tails probability (33%-67%)" AnchorPane.leftAnchor="25.0"/>
+      <CheckBox fx:id="optionSeedConfig" layoutX="25.0" mnemonicParsing="false" onMouseClicked="#handleSeedConfigClick" text="Show seed/config strings in intro" AnchorPane.leftAnchor="25.0"/>
       
       <!-- HP & Retreat Cost Range Controls -->
       <ChoiceBox fx:id="minHP1" layoutX="433.0" prefWidth="75.0" AnchorPane.leftAnchor="433.0"/>

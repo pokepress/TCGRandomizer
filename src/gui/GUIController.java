@@ -58,7 +58,7 @@ public class GUIController implements Initializable {
 	@FXML private CheckBox optionHP, optionWR, optionRC, optionMoves, optionFixCallForFamily;
 	@FXML private CheckBox optionFillEmpty, optionMatchEnergies, optionSpeed;
         @FXML private CheckBox optionTutorial, optionBossAntiCheat, optionRebalanceTrainers, optionRebalanceAttackCosts;
-        @FXML private CheckBox optionClubMasterReq, optionMedalReq;
+        @FXML private CheckBox optionClubMasterReq, optionMedalReq, optionFlipProb, optionSeedConfig;
 	
 	/* Minimum and maximum HP and retreat cost values for each of the 6 evolution types */
 	@FXML private Label minHPLbl, maxHPLbl, minRCLbl, maxRCLbl;
@@ -347,6 +347,16 @@ public class GUIController implements Initializable {
         @FXML
 	private void handleMedalReqClick() {	
 		setOption (Settings.Options.MEDALREQ.ordinal());
+	}
+        
+        @FXML
+	private void handleFlipProbClick() {	
+		setOption (Settings.Options.FLIPPROB.ordinal());
+	}
+        
+        @FXML
+	private void handleSeedConfigClick() {	
+		setOption (Settings.Options.SHOWSEEDCONFIG.ordinal());
 	}
 	
 	/** Initializes all choice boxes to their default values */
@@ -908,6 +918,10 @@ public class GUIController implements Initializable {
             yPos += checkYIncrement;
             optionMedalReq.setLayoutY(yPos);
             yPos += checkYIncrement;
+            optionFlipProb.setLayoutY(yPos);
+            yPos += checkYIncrement;
+            optionSeedConfig.setLayoutY(yPos);
+            yPos += checkYIncrement;
             return yPos;
         }
         
@@ -1002,22 +1016,72 @@ public class GUIController implements Initializable {
         
         /** Returns a string representing some of the configuration settings
             used to generate the ROM. Intended for use in output filename.*/
-        public String getConfigString()
+        public String getConfigString(boolean omitSeperatorChars)
         {
             String config = "";
-            for (int opt = 0 ; opt < Settings.NUM_OPTIONS ; opt++)
+            int hexVal = 0;
+            int opt = 0;
+            for ( ; opt < Settings.NUM_OPTIONS ; opt++)
             {
-                config += options[opt] ? "1" : "0";
+                switch (opt % 4)
+                {
+                    case 0:
+                        hexVal = 0;
+                        hexVal += options[opt] ? 8 : 0;
+                        break;
+                    case 1:
+                        hexVal += options[opt] ? 4 : 0;
+                        break;
+                    case 2:
+                        hexVal += options[opt] ? 2 : 0;
+                        break;
+                    case 3:
+                        hexVal += options[opt] ? 1 : 0;
+                        config += Integer.toHexString(hexVal).toUpperCase();
+                        break;
+                }
             }
             
-            //If Randomizing Weakness/Resistance, specify type
+            if (opt % 4 != 0)
+            {
+                config += Integer.toHexString(hexVal).toUpperCase();
+            }
+            
+            if(options[Settings.Options.HP.ordinal()])
+            {
+                config += omitSeperatorChars ? "" : "h";
+                for (int evo = 0 ; evo <= EvoTypes.EVO3OF3.ordinal() ; evo++)
+                {
+                    int minHP = EvoTypes.values()[evo].getMinHP()/10;
+                    int maxHP = EvoTypes.values()[evo].getMaxHP()/10;
+                    config += Integer.toHexString(minHP).toUpperCase();
+                    config += Integer.toHexString(maxHP).toUpperCase();
+                }
+            }
+            
+            if(options[Settings.Options.RC.ordinal()])
+            {
+                config += omitSeperatorChars ? "" : "r";
+                for (int evo = 0 ; evo <= EvoTypes.EVO3OF3.ordinal() ; evo++)
+                {
+                    int minRC = EvoTypes.values()[evo].getMinRC();
+                    int maxRC = EvoTypes.values()[evo].getMaxRC();
+                    config += Integer.toHexString(minRC * 4 + maxRC).toUpperCase();
+                }
+            }
+            
+            //If Randomizing Weakness/Resistance, specify type and range
             if(options[Settings.Options.WR.ordinal()])
             {
-                config += "WR" + Settings.settings.getWRRandomizationType().ordinal();
+                config += (omitSeperatorChars ? "" : "w") + Settings.settings.getWRRandomizationType().ordinal();
+                config += Integer.toHexString(Settings.settings.getMinWeaknesses() * 4 
+                        + Settings.settings.getMaxWeaknesses()).toUpperCase();
+                config += Integer.toHexString(Settings.settings.getMinResistances() * 4 
+                        + Settings.settings.getMaxResistances()).toUpperCase();
             }
             
             //Status of Illusion cards
-            config += "IL" + Settings.settings.getIllusionCardAvailability().ordinal();
+            config += (omitSeperatorChars ? "" : "i") + Settings.settings.getIllusionCardAvailability().ordinal();
             
             return config;
         }
