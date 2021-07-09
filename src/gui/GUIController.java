@@ -46,6 +46,8 @@ public class GUIController implements Initializable {
         private static final String CoinGrassMedal = "Grass Medal";
         private static final String CoinFireMedal = "Fire Medal";
         private static final String CoinWaterMedal = "Water Medal";
+        private static final String CoinLightningMedal = "Lightning Medal";
+        private static final String CoinPsychicMedal = "Psychic Medal";
         private static final String CoinChansey = "Chansey";
         private static final String CoinPsyduck = "Psyduck";
         
@@ -380,6 +382,8 @@ public class GUIController implements Initializable {
                 PlayerCoinList.add(CoinGrassMedal);
                 PlayerCoinList.add(CoinFireMedal);
                 PlayerCoinList.add(CoinWaterMedal);
+                PlayerCoinList.add(CoinLightningMedal);
+                PlayerCoinList.add(CoinPsychicMedal);
                 PlayerCoinList.add(CoinChansey);
                 PlayerCoinList.add(CoinPsyduck);
                 
@@ -504,6 +508,12 @@ public class GUIController implements Initializable {
                         break;
                     case waterMedal:
                         playerCoin.setValue(CoinWaterMedal);
+                        break;
+                    case lightningMedal:
+                        playerCoin.setValue(CoinLightningMedal);
+                        break;
+                    case psychicMedal:
+                        playerCoin.setValue(CoinPsychicMedal);
                         break;
                     case chansey:
                         playerCoin.setValue(CoinChansey);
@@ -833,6 +843,14 @@ public class GUIController implements Initializable {
                                 else if (newValue.equals(CoinWaterMedal))
                                 {
                                     Settings.settings.setCoin(Settings.coin.waterMedal);
+                                }
+                                else if (newValue.equals(CoinLightningMedal))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.lightningMedal);
+                                }
+                                else if (newValue.equals(CoinPsychicMedal))
+                                {
+                                    Settings.settings.setCoin(Settings.coin.psychicMedal);
                                 }
                                 else if (newValue.equals(CoinChansey))
                                 {
