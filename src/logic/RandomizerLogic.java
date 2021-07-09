@@ -290,6 +290,56 @@ class RandomizerLogic {
                     f.seek(0xe45f);
                     f.writeInt(0x43434343);
                 }
+                
+                int joshuaReq =  RNG.randomRange(0, 3);
+                if (joshuaReq % 2 == 1)
+                {
+                    //Remove event x15 (Sara) check
+                    f.seek(0xe221);
+                    f.writeInt(0x43434343);
+                    
+                    if ((joshuaReq & 2) == 0)
+                    {
+                        //Still need to battle Amanda
+                        f.seek(0x42485);
+                        f.writeBytes(String.format("%1$-22s","Amanda first."));
+                        f.seek(0x4251c);
+                        f.writeBytes(String.format("%1$-16s","Amanda?"));
+                        f.seek(0x42556);
+                        f.writeBytes(String.format("%1$-18s","Amanda..."));
+                    }
+                }
+                if ((joshuaReq & 2) == 2)
+                {
+                    //Remove event x16 (Amanda) check
+                    f.seek(0xe21d);
+                    f.writeInt(0x43434343);
+                    
+                    if (joshuaReq % 2 == 0)
+                    {
+                        //Still need to battle Sara
+                        f.seek(0x42485);
+                        f.writeBytes(String.format("%1$-22s","Sara first."));
+                        f.seek(0x4251c);
+                        f.writeBytes(String.format("%1$-16s","Sara?"));
+                        f.seek(0x42556);
+                        f.writeBytes(String.format("%1$-18s","Sara..."));
+                    }
+                }
+                if(joshuaReq == 3)
+                {
+                    /*No required battles for Joshua-remove references to Sara
+                    and Amanda*/
+                    f.seek(0x4247b);
+                    f.writeBytes(String.format("%1$-32s","Then..."));
+                    f.seek(0xe239);
+                    f.writeShort(0x4343);
+                    f.writeByte(0x43);
+                    f.seek(0xe241);
+                    f.writeByte(0x02);
+                    f.writeShort(0x3e04);
+                    f.writeShort(0x4343);
+                }
             
                 byte murrayBadges = (byte) RNG.randomRange(0, 7);
 		f.seek(0xeae5); //text comparison value
