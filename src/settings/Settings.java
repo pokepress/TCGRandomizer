@@ -34,6 +34,8 @@ public class Settings {
             grassMedal,
             fireMedal,
             waterMedal,
+            lightningMedal,
+            psychicMedal,
             chansey,
             psyduck
         }
