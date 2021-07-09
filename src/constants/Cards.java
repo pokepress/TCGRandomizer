@@ -669,13 +669,13 @@ public enum Cards {
 		return evoType;
 	}
         
-        /** Returns the weakness/resintance combination of the original card. See
+        /** Returns the weakness/resistance combination of the original card. See
             WRGroupsByComb enum.*/
         public int getWRComb() {
 		return wrComb;
 	}
         
-        /** Returns the weakness/resintance evolution line of the original card. 
+        /** Returns the weakness/resistance evolution line of the original card. 
             See WRGroupsByLine enum.*/
         public int getWRLine() {
 		return wrLine;
