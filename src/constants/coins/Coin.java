@@ -55,6 +55,12 @@ public abstract class Coin {
             case waterMedal:
                 playerCoin = new WaterMedal(f);
                 break;
+            case lightningMedal:
+                playerCoin = new LightningMedal(f);
+                break;
+            case psychicMedal:
+                playerCoin = new PsychicMedal(f);
+                break;
             case chansey:
                 playerCoin = new ChanseyCoin(f);
                 break;
