@@ -33,7 +33,7 @@ It also provides a number of options for tweaking game behavior:
   * Draw 5 on Professor Oak instad of 7
   * Gambler (changes to "Birch O") draws 7 (heads) or 4 (tails) cards instead of 8/1
 * Randomize requirements for battling Club Masters:
-  * Joshua (Water) may require you to fight just Sara, Just Amanda, or neither (50/50 each-you still need to beat Joshua to battle Club Master Amy)
+  * Joshua (Water) may require you to fight just Sara, just Amanda, or neither (50/50 each-you still need to beat Joshua to battle Club Master Amy)
   * Isaac (Lightning) may not require defeating Jennifer, Nicholas, and/or Brandon (50/50 each)
   * Murray (Psychic) may require anywhere between 0 and 7 medals
   * Rick (Science) may not require defeating Joseph (50/50 chance)
