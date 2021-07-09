@@ -16,7 +16,7 @@ The minimum and maximum HP, retreat cost, and number of weaknesses and resistanc
 
 If randomizing weakness and resistance, there are currently four options:
 * Randomize each card individually
-* Randomize each original weakness/resistance combination identically (in other words, all Pokemon with a weakness to psychic and no resistance will have the same combination in the randomized game)
+* Randomize each original weakness/resistance combination identically (in other words, all Pokemon who normally have a weakness to psychic and no resistance will have the same combination in the randomized game)
 * Randomize each gen 1 evolution line uniformly. Note that Hitmonchan and Hitmonlee are considered separate, Eevee is grouped in with all its evolutions, and Surfing and Flying Pikachu will be given the same weakness and resistance as regular Pikachu. 
 * Remove weakness and resistance for all cards
 
@@ -33,6 +33,7 @@ It also provides a number of options for tweaking game behavior:
   * Draw 5 on Professor Oak instad of 7
   * Gambler (changes to "Birch O") draws 7 (heads) or 4 (tails) cards instead of 8/1
 * Randomize requirements for battling Club Masters:
+  * Joshua (Water) may require you to fight just Sara, Just Amanda, or neither (50/50 each-you still need to beat Joshua to battle club master Amy)
   * Isaac (Lightning) may not require defeating Jennifer, Nicholas, and/or Brandon (50/50 each)
   * Murray (Psychic) may require anywhere between 0 and 7 medals
   * Rick (Science) may not require defeating Joseph (50/50 chance)
@@ -51,14 +52,14 @@ It also provides a number of options for tweaking game behavior:
 #### <b>Planned features or tweaks (in no particular order)</b>
 
 * Selectable "energy mappings" in the shuffle moves option.
-* Option to force a damaing move on every card.
+* Option to force a damaging move on every card.
 * Further randomization of moves, beyond just shuffling the effects, and randomizing energy requirements and damage. Randomizing the move effects themselves may be a possibility, but further reverse engineering of the Pokemon TCG duel engine will be necessary first.
 * Randomization of types. This is related to the randomization of energy requirements and would require adjusting the decks to keep them type-consistent. 
 * Randomization of other misc Pokemon card data.
 * Being able to load the Pokemon TCG ROM from the file system.
 * Increase the chance of a Challenge Cup being triggrered on boot in postgame.
 * Additional options for player character and in-game coin.
-* Randomize requirements for Water, Fighting, and Grass Club Masters (Rock's Club Master has no requirement to begin with, making it more complicated)
+* Randomize requirements for Fighting and Grass Club Masters (Rock's Club Master has no requirement to begin with, making it more complicated)
 * Customize the title screen, credits, and other elements
 
 Contributions aren't expected but would always be welcome.
